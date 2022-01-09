@@ -1,0 +1,66 @@
+.feature-article{border-bottom:1px solid #d21007;overflow:hidden;padding-bottom:20px;margin-bottom:20px;}
+.first-article{width:65%;}
+.first-article .postImg{height:300px;}
+.first-article h4{margin:10px 0;font-size:20px;color:#d21007}
+.first-article h4:hover{color:#333}
+.nth-article{width:33%}
+.nth-article .item+.item{margin-top:16px;}
+.nth-article .postImg{height:140px;}
+.nth-article h4{font-size:16px;font-weight:normal;color:#333;margin-top:8px;}
+.nth-article h4:hover{color:#d21007}
+.list-article-category .item{float:left;width:48%;overflow:hidden}
+.list-article-category .item+.item+.item{margin-top:20px;}
+.list-article-category .alt{float:right;}
+.list-article-category .item .postImg{height:262px;}
+.list-article-category .item h4{margin:10px 0;color:#d21007;font-size:17px;height:48px;overflow:hidden}
+.list-same-post {overflow:hidden;margin-top:18px;}
+.list-same-post .item{width:24%;margin-right:1.25%;float:left;overflow:hidden}
+.list-same-post .item:nth-child(4n+4){margin-right:0}
+.list-same-post .item:nth-child(n+5){margin-top:14px;}
+.list-same-post .postImg{height:120px;}
+.list-same-post h4{color: #fff;font-size:16px;font-weight:normal;height: 48px;margin-top:6px;}
+.list-same-post h4:hover{color:#d21007;}
+.list-same-project .item{width:32%;float:left;margin-right:2%;}
+.list-same-project .item:last-child{margin-right:0;}
+.list-same-project .item .postImg{height:180px;}
+.list-same-project .item h4{font-size:16px;margin-top:8px;color:#d21007;}
+.documents{width:100%;border-collapse:collapse;}
+.documents td,.documents th,.documents tr{border:1px solid #d1d1d1;}
+.documents td,.documents th{padding:3px 10px;}
+.documents th{background-color:#d21007;color:#fff;}
+.documents tr td:last-child{width:50px;text-align:center;}
+.documents td{font-size:14px;color:#3f3f3f;}
+.documents a{color:#d21007;font-size:20px;}
+
+@media only screen
+  and (max-width :1023px){
+      .list_article .postImg{height:170px;}
+  }
+
+@media only screen
+  and (max-width :767px){
+      .list_article .postImg{height:130px;}
+      .list_article .text h4{font-size:16px;}
+      .list_article .text .desc{font-size:13px;}
+      .list_article .text .link{display:none;}
+  }
+
+@media only screen
+  and (max-width :467px){
+    .first-article{width:100%;float:none}
+    .nth-article{width:100%;float:none;margin-top:15px;}
+    .nth-article .item{width:49%;float:left}
+    .nth-article .item .postImg{height:100px;}
+    .nth-article .item+.item{margin:0;float:right}
+    .nth-article h4{font-size:13px;}
+    .first-article .postImg{height:200px;}
+      .list_article li{width:48%;margin-right:4%}
+      .list_article li:nth-child(3n+3){margin-right:4%}
+      .list_article li:nth-child(2n+2){margin-right:0}
+      .list_article li:nth-child(n+3){margin-top:16px;}
+      .list-article-category .item .postImg{height:100px;}
+      .list-article-category .item h4{font-size:13px;height:36px;}
+      .list-same-post .item{width:49%;margin-right:2%;}
+      .list-same-post .item:nth-child(2n+2){margin-right:0;}
+      .list-same-post .item:nth-child(n+3){margin-top:14px;}
+  }

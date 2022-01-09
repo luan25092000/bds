@@ -1,0 +1,234 @@
+.wrap {
+  position: fixed;
+  width: 300px;
+  height: 400px;
+  z-index: 9999999;
+  right: 0px;
+  bottom: 0px;
+}
+
+.x {
+  font-family: arial, helvetica;
+  background: rgba(78, 86, 101, 0.8) none repeat scroll 0 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  display: inline-block;
+  height: 25px;
+  line-height: 25px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: -19px;
+  width: 25px;
+  z-index: 99999999;
+}
+
+.x:hover {
+  cursor: pointer;
+}
+
+.pxem {
+  text-align: left;
+  height: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+  background: #d21007;
+  width: 100%;
+  bottom: 0;
+  display: block;
+  left: 0px;
+  position: absolute;
+  z-index: 999999999;
+  border-left: 1px solid #fff;
+}
+
+.pxem a.axem {
+  color: #fff;
+  font-family: arial, helvetica;
+  font-size: 12px;
+  line-height: 23px;
+  padding-left: 5px;
+  text-decoration: none;
+}
+
+.pxem a.axem:hover {
+  text-decoration: underline;
+}
+
+.alogo {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  z-index: 999999999999;
+  width: 40px;
+  height: 20px;
+  display: inline-block;
+  background: #d21007;
+  padding-right: 0px;
+  padding-left: 5px;
+}
+
+.mnv-tuvan {
+  position: fixed;
+  width: 50px;
+  /* background: #d21007; */
+  z-index: 99999;
+  right: 6px;
+  bottom: 46px;
+  /* border-style: solid solid none; */
+  border-width: 1px 1px 0;
+  border-color: #fff;
+  height: 50px;
+}
+
+.mzalo {
+  position: fixed;
+  width: 50px;
+  /* background: #d21007; */
+  z-index: 99999;
+  right: 6px;
+  bottom: 99px;
+  /* border-style: solid solid none; */
+  border-width: 1px 1px 0;
+  border-color: #fff;
+  height: 50px;
+}
+
+.mnv-tuvan p {
+  color: #fff;
+  font-size: 15px;
+  margin: 0;
+  padding: 0 13px;
+  text-align: left;
+}
+
+.mnv-tuvan p a {
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 0px 7px;
+  margin: 0;
+  display: inline-block;
+  font-family: arial, helvetica;
+  text-decoration: none;
+}
+
+.mnv-tuvan p a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mnv-tuvan p img {
+  float: right;
+  margin-top: 10px;
+}
+
+.fb_dialog_content > iframe {
+  right: -8px !important;
+}
+
+/* Dropdown Button */
+.dropbtn {
+  padding: 5px 20px;
+  display: block;
+  color: #d21007;
+  position: relative;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: red;
+  min-width: 160px;
+  z-index: 1;
+  color: white;
+  padding: 0.5rem;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.title-article {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.description {
+  font-size: 1rem;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+.search {
+  display: flex;
+  max-width: 15rem;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid white;
+  border-right: none;
+  padding: 1px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+
+.searchTerm:focus {
+  color: black;
+}
+
+.searchButton {
+  width: 40px;
+  height: 28px;
+  border: 1px solid white;
+  background: white;
+  text-align: center;
+  color: red;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap {
+  width: 25%;
+  position: absolute;
+  top: 14%;
+  left: 41%;
+}
+
+.flexslider .slides {
+  display: flex !important;
+  align-items: center;
+}
+
+.flexslider .slides img {
+  max-height: 25rem;
+  max-width: 100%;
+  width: auto !important;
+  margin: auto;
+}
+
+.flexslider .flex-control-thumbs {
+  display: flex !important;
+  align-items: center;
+}
+
+.flexslider .flex-control-thumbs li {
+  margin-right: 0.5rem !important;
+}
+
+.flexslider .flex-control-thumbs img {
+  margin-right: auto;
+  max-height: 10rem;
+  max-width: 100%;
+  width: auto !important;
+}
