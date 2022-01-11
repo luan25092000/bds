@@ -48,6 +48,11 @@
                             <td>
                                 <a href="{{ route('project.delete',['id' => $project->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
                                 <a href="{{ route('project.edit.form',['id' => $project->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                @if ($project->status == 0)
+                                    <a href="{{ route('project.update.status',['id' => $project->id, 'status' => 1]) }}" style="margin:0 1rem;"><i class="fa fa-usd" aria-hidden="true"></i></a>
+                                @else
+                                    <a href="{{ route('project.update.status',['id' => $project->id, 'status' => 0]) }}" style="margin:0 1rem;"><i class="fa fa-clock-o" aria-hidden="true"></i></a>
+                                @endif
                             </td>
                         </tr>
                     @php $count++; @endphp

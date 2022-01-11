@@ -59,7 +59,7 @@
                                 let imagePreview = $(`<div class="image-preview" style="display: none">
                                         <div class="overlay"></div>
                                         <div class="remove" onclick="removeImage(this)">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
                                             <input type="file" name="thumbnail[]" accept="image/*"
                                                 onchange="checkImage(this)" style="display: none" id="thumbnail">
                                         </div>

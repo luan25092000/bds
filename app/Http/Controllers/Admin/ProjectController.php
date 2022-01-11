@@ -129,4 +129,10 @@ class ProjectController extends Controller
         $project->delete();
         return redirect()->route('project.list')->with("success","Xóa thành công");
     }
+
+    public function updateStatus($id, $status)
+    {
+        Project::where('id', $id)->update(['status' => $status]);
+        return redirect()->route('project.list')->with("success","Cập nhật thành công");
+    }
 }

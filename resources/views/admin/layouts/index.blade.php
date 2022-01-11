@@ -32,10 +32,47 @@
     <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('admin/js/main.js') }}"></script>
     <script src="{{ asset('admin/ckeditor/ckeditor.js') }}"></script>
-    <script src="{{ asset('admin/ckeditor/ckfinder.js') }}"></script>
+    <script src="{{ asset('admin/ckfinder/ckfinder.js') }}"></script>
     <script>
         var editor = CKEDITOR.replace('content');
         CKFinder.setupCKEditor(editor);
+    </script>
+    <script>
+        // Handle choose city,district,ward
+        $('#city_id').change(function(e){
+            var city_id = $(this).val();
+            $.ajax({
+                url: "/ad/product/ajax_district",
+                type: 'GET',
+                data: {
+                    city_id:city_id
+                },
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                }
+            }).done(function(res){
+                if (res.status == 200) {
+                    $('#district').html(res.data);
+                }
+            });
+        });
+        $('#district').on('change', '#district_id', function(e){
+            var district_id = $(this).val();
+            $.ajax({
+                url: "/ad/product/ajax_ward",
+                type: 'GET',
+                data: {
+                    district_id:district_id
+                },
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                }
+            }).done(function(res){
+                if (res.status == 200) {
+                    $('#ward').html(res.data);
+                }
+            });
+        });
     </script>
 </body>
 

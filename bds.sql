@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2022 at 07:51 PM
+-- Generation Time: Jan 11, 2022 at 01:56 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.4.21
 
@@ -869,7 +869,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2022_01_04_125110_create_contacts_table', 1),
 (11, '2022_01_04_125245_create_wishlists_table', 1),
 (12, '2022_01_04_125303_create_orders_table', 1),
-(13, '2022_01_08_185657_create_medias_table', 1);
+(13, '2022_01_08_185657_create_medias_table', 1),
+(14, '2022_01_11_085411_add_name_column_to_products_table', 2);
 
 -- --------------------------------------------------------
 
@@ -936,14 +937,15 @@ CREATE TABLE `products` (
   `area` int(11) DEFAULT NULL,
   `project_id` bigint(20) UNSIGNED DEFAULT NULL,
   `category_id` bigint(20) UNSIGNED NOT NULL,
-  `manager_id` bigint(20) UNSIGNED NOT NULL,
+  `manager_id` bigint(20) UNSIGNED DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `room_price` int(11) NOT NULL,
   `water_price` int(11) DEFAULT NULL,
   `electricity_price` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -11809,7 +11811,7 @@ ALTER TABLE `medias`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `orders`

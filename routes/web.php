@@ -48,6 +48,8 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::post('add','ProjectController@store')->name('project.add');
             
             Route::get('delete/{id}','ProjectController@destroy')->name('project.delete');
+
+            Route::get('update/{status}/{id}', 'ProjectController@updateStatus')->name('project.update.status');
         });
         // Category
         Route::group(['prefix'=>'category'],function(){
@@ -80,6 +82,10 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::get('disable/{id}','ProductController@disable')->name('product.disable');
 
             Route::get('enable/{id}','ProductController@enable')->name('product.enable');
+
+            Route::get('ajax_district','ProductController@ajaxDistrict');
+            
+            Route::get('ajax_ward','ProductController@ajaxWard');
         });
         // User
         Route::group(['prefix'=>'user'],function(){
