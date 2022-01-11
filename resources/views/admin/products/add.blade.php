@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="area">Diện tích: <span class="text-danger">*</span></label>
+                            <label for="area">Diện tích (m<sup>2</sup>): <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" placeholder="Nhập diện tích" id="area" name="area" min=0 required>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                     <input type="number" class="form-control" placeholder="Nhập số phòng" id="room_count" name="room_count" min=0 required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="floor_count">Số lầu: <span class="text-danger">*</span></label>
+                                    <label for="floor_count">Số tầng: <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập số lầu" id="floor_count" name="floor_count" min=0 required>
                                 </div>
                             </div>
@@ -88,11 +88,11 @@
                                 </div>
                                 <div class="col-md-4" id="district">
                                     <label for="district_id">Quận / Huyện: <span class="text-danger">*</span></label>
-                                    @include('admin.products.includes.district')
+                                    @include('admin.products.includes.district', compact('product'))
                                 </div>
                                 <div class="col-md-4" id="ward">
                                     <label for="ward_id">Xã / Phường: <span class="text-danger">*</span></label>
-                                    @include('admin.products.includes.ward')
+                                    @include('admin.products.includes.ward', compact('product'))
                                 </div>
                             </div>
                         </div>
@@ -105,11 +105,11 @@
                                     <input type="number" class="form-control" placeholder="Nhập tiền phòng" id="room_price" name="room_price" min=0 required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="electricity_price">Tiền điện: <span class="text-danger">*</span></label>
+                                    <label for="electricity_price">Tiền điện (kí): <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập tiền điện" id="electricity_price" name="electricity_price" min=0 required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="water_price">Tiền nước: <span class="text-danger">*</span></label>
+                                    <label for="water_price">Tiền nước (m<sup>3</sup>): <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập tiền nước" id="water_price" name="water_price" min=0 required>
                                 </div>
                             </div>

@@ -42,14 +42,14 @@
                                 <div style='background-image: url({{ asset($item->image_src) }})'>
                                     <div class="overlay"></div>
                                     <div class="remove" onclick="removeImage(this)">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
                                         <input type="hidden" name="thumbnail_src[]" 
                                             value="{{ $item->image_src }}" style="display: none" id="thumbnail">
                                     </div>
                                 </div>
                             @endforeach
                             <div id="add-image" class="add" onclick="addImage()">
-                                <i class="fas fa-plus"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div id="error" class="text-danger"></div>

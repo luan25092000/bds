@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Danh mục sản phẩm
+                <h1 class="page-header">Tin tức
                     <small>Danh sách</small>
                 </h1>
                 @if(Session::has('invalid'))
@@ -27,19 +27,25 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên danh mục</th>
+                        <th>Ảnh</th>
+                        <th>Danh mục tin tức</th>
+                        <th>Tiêu đề</th>
+                        <th>Thời gian đăng</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody align="center">
                     @php $count = 1; @endphp
-                    @foreach ($categories as $category)
+                    @foreach ($articles as $article)
                         <tr>
                             <td>{{ $count }}</td>
-                            <td>{{ $category->name }}</td>
+                            <td><a href="{{ asset($article->thumbnail) }}" target="_blank"><img src="{{ asset($article->thumbnail) }}" width=60px ></a></td>
+                            <td>{{ $article->category_article_name }}</td>
+                            <td>{{ $article->title }}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($article->updated_at)) }}</td>
                             <td>
-                                <a href="{{ route('category.delete',['id' => $category->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                <a href="{{ route('category.edit.form',['id' => $category->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="{{ route('article.delete',['id' => $article->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a href="{{ route('article.edit.form',['id' => $article->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     @php $count++; @endphp

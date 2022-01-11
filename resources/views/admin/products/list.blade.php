@@ -42,12 +42,19 @@
                     @foreach ($products as $product)
                         <tr>
                             <td>{{ $count }}</td>
-                            <td><img src="{{ asset($product->image->first()->image_src) }}" width=60px ></td>
+                            <td><a href="{{ asset($product->image->first()->image_src) }}" target="_blank"><img src="{{ asset($product->image->first()->image_src) }}" width=60px></a></td>
                             <td>{{ $product->category_name }}</td>
                             <td>{{ $product->project_name }}</td>
                             <td>{{ $product->manager_name }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->area }}</td>
+                            <td>{{ $product->area }} / m<sup>2</sup></td>
+                            <td>
+                                @if ($product->status == 1)
+                                    <i class="fa fa-check text-success" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-ban text-danger" aria-hidden="true"></i>
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('product.delete',['id' => $product->id]) }}" onclick="return confirm('Bạn muốn xóa sản phẩm này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
                                 <a href="{{ route('product.edit.form',['id' => $product->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

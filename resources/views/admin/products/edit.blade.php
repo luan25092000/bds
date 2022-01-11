@@ -51,12 +51,12 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="content">Mô tả sản phẩm:</label>
-                            <textarea class="form-control" id="content" name="content"></textarea>
+                            <textarea class="form-control" id="content" name="content">{{ $product->description }}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="area">Diện tích: <span class="text-danger">*</span></label>
+                            <label for="area">Diện tích (m<sup>2</sup>): <span class="text-danger">*</span></label>
                             <input type="number" class="form-control" placeholder="Nhập diện tích" id="area" name="area" min=0 value="{{ $product->area }}" required>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                                     <input type="number" class="form-control" placeholder="Nhập số phòng" id="room_count" name="room_count" value="{{ $product->room_count }}" min=0 required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="floor_count">Số lầu: <span class="text-danger">*</span></label>
+                                    <label for="floor_count">Số tầng: <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập số lầu" id="floor_count" name="floor_count" value="{{ $product->floor_count }}" min=0 required>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <label for="city_id">Thành phố: <span class="text-danger">*</span></label>
-                                    <select id="city_id" name="city_id" required>
+                                    <select id="city_id" name="city_id" class="form-control" required>
                                         <option value="">Chọn thành phố</option>
                                         @foreach ($cities as $city)
                                             <option value="{{ $city->matp }}" {{ $city->matp == $product->city_id ? 'selected' : '' }}>{{ $city->name }}</option>
@@ -103,11 +103,11 @@
                                     <input type="number" class="form-control" placeholder="Nhập tiền phòng" id="room_price" name="room_price" value="{{ $product->room_price }}" min=0 required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="electricity_price">Tiền điện: <span class="text-danger">*</span></label>
+                                    <label for="electricity_price">Tiền điện (kw): <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập tiền điện" id="electricity_price" name="electricity_price" value="{{ $product->electricity_price }}" min=0 required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="water_price">Tiền nước: <span class="text-danger">*</span></label>
+                                    <label for="water_price">Tiền nước (m<sup>3</sup>): <span class="text-danger">*</span></label>
                                     <input type="number" class="form-control" placeholder="Nhập tiền nước" id="water_price" name="water_price" min=0 value="{{ $product->water_price }}" required>
                                 </div>
                             </div>
@@ -125,18 +125,18 @@
                     <div class="col-md-12">
                         <label>Hình ảnh sản phẩm<span class="text-danger">*</span></label>
                         <div id="multiple-images">
-                            @foreach($project->image as $item)
+                            @foreach($product->image as $item)
                                 <div style='background-image: url({{ asset($item->image_src) }})'>
                                     <div class="overlay"></div>
                                     <div class="remove" onclick="removeImage(this)">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
                                         <input type="hidden" name="thumbnail_src[]" 
                                             value="{{ $item->image_src }}" style="display: none" id="thumbnail">
                                     </div>
                                 </div>
                             @endforeach
                             <div id="add-image" class="add" onclick="addImage()">
-                                <i class="fas fa-plus"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div id="error" class="text-danger"></div>

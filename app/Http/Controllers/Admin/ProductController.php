@@ -73,7 +73,7 @@ class ProductController extends Controller
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
                 $image->storeAs('/public/images/products', $name);
-                $product->image()->create(["image_src" => "images/products/". $name]);
+                $product->image()->create(["image_src" => "storage/images/products/". $name]);
             }
             return redirect()->route('product.list')->withInput()->with("success", "Lưu thành công");
         }
@@ -160,7 +160,7 @@ class ProductController extends Controller
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
                 $image->storeAs('/public/images/products', $name);
-                $product->image()->create(["image_src" => "images/products/". $name]);
+                $product->image()->create(["image_src" => "storage/images/products/". $name]);
             }
         }
         $product->save();
@@ -196,5 +196,17 @@ class ProductController extends Controller
             'status' => 200,
             'data' => view('admin.products.includes.ward', compact('wards'))->render()
         ]);
+    }
+
+    public function disable($id)
+    {
+        Product::where('id', $id)->update(['status' => 0]);
+        return redirect()->route('product.list')->with("success","Ẩn thành công");
+    }
+
+    public function enable($id)
+    {
+        Product::where('id', $id)->update(['status' => 1]);
+        return redirect()->route('product.list')->with("success","Hiện thành công");
     }
 }

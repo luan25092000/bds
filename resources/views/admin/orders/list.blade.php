@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Danh mục sản phẩm
+                <h1 class="page-header">Hợp đồng
                     <small>Danh sách</small>
                 </h1>
                 @if(Session::has('invalid'))
@@ -27,23 +27,13 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tên danh mục</th>
+                        <th>Họ tên</th>
+                        <th>Số điện thoại</th>
+                        <th>Email</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody align="center">
-                    @php $count = 1; @endphp
-                    @foreach ($categories as $category)
-                        <tr>
-                            <td>{{ $count }}</td>
-                            <td>{{ $category->name }}</td>
-                            <td>
-                                <a href="{{ route('category.delete',['id' => $category->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                <a href="{{ route('category.edit.form',['id' => $category->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                    @php $count++; @endphp
-                    @endforeach
                 </tbody>
             </table>
         </div>

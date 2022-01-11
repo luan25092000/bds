@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Article;
+use App\Models\CategoryArticle;
 
 class ArticleController extends Controller
 {
@@ -14,7 +16,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::join('category_articles', 'articles.category_article_id', '=', 'category_articles.id')
+        ->get(['articles.*', 'category_articles.name AS category_article_name']);
+        return view('admin.articles.list',compact('articles'));
     }
 
     /**
@@ -24,7 +28,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $category_articles = CategoryArticle::all();
+        return view('admin.articles.add', compact('category_articles'));
     }
 
     /**
@@ -35,7 +40,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->hasFile('image')) {
+            //  Let's do everything here
+            if ($request->file('image')->isValid()) {
+                $request->image->storeAs('/public/images/articles', $request->image->getClientOriginalName());
+                Article::create([
+                    'title' => $request->title,
+                    'description' => $request->content,
+                    'category_article_id' => $request->category_article_id,
+                    'thumbnail' => '/storage/images/articles/' . $request->image->getClientOriginalName(),
+                ]);
+                return redirect()->route('article.list')->with('success', 'Lưu thành công');
+            }
+        }
     }
 
     /**
@@ -57,7 +74,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category_articles = CategoryArticle::all();
+        $article = Article::find($id);
+        return view('admin.articles.edit', compact('article', 'category_articles'));
     }
 
     /**
@@ -69,7 +88,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Article::find($id);
+        if ($request->hasFile('image')) {
+            //  Let's do everything here
+            if ($request->file('image')->isValid()) {
+                $request->image->storeAs('/public/images/articles', $request->image->getClientOriginalName());
+                $article->thumbnail = '/storage/images/articles/' . $request->image->getClientOriginalName();
+            }
+        }
+        $article->title = $request->title;
+        $article->description = $request->content;
+        $article->category_article_id = $request->category_article_id;
+        $article->save();
+        return redirect()->route('article.list')->with('success', 'Cập nhật thành công');
     }
 
     /**
@@ -80,6 +111,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+        return redirect()->route('article.list')->with('success', 'Xóa thành công');
     }
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\CategoryArticle;
+use App\Models\Order;
 
-class CategoryArticleController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryArticleController extends Controller
      */
     public function index()
     {
-        $category_articles = CategoryArticle::all();
-        return view('admin.category_articles.list', compact('category_articles'));
+        $orders = Order::all();
+        return view('admin.orders.list', compact('orders'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.category_articles.add');
+        //
     }
 
     /**
@@ -37,10 +37,7 @@ class CategoryArticleController extends Controller
      */
     public function store(Request $request)
     {
-        CategoryArticle::create([
-            'name' => $request->name
-        ]);
-        return redirect()->route('category.article.list')->with("success", "Lưu thành công");
+        //
     }
 
     /**
@@ -62,8 +59,7 @@ class CategoryArticleController extends Controller
      */
     public function edit($id)
     {
-        $category_article = CategoryArticle::find($id);
-        return view('admin.category_articles.edit', compact('category_article'));
+        //
     }
 
     /**
@@ -75,10 +71,7 @@ class CategoryArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category_article = CategoryArticle::find($id);
-        $category_article->name = $request->name;
-        $category_article->save();
-        return redirect()->route('category.article.list')->with("success", "Lưu thành công");
+        //
     }
 
     /**
@@ -89,8 +82,6 @@ class CategoryArticleController extends Controller
      */
     public function destroy($id)
     {
-        $category_article = CategoryArticle::find($id);
-        $category_article->delete();
-        return redirect()->route('category.article.list')->with("success", "Xóa thành công");
+        //
     }
 }

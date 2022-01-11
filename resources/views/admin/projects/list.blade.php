@@ -40,7 +40,7 @@
                     @foreach ($projects as $project)
                         <tr>
                             <td>{{ $count }}</td>
-                            <td><img src="{{ asset($project->image->first()->image_src) }}" width=60px ></td>
+                            <td><a href="{{ asset($project->image->first()->image_src) }}" target="_blank"><img src="{{ asset($project->image->first()->image_src) }}" width=60px ></a></td>
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->address }}</td>
                             <td>{{ $project->manager_name }}</td>

@@ -19,7 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::join('users','projects.manager_id','=','users.id')
-        ->get(['projects.*', 'users.name']);
+        ->get(['projects.*', 'users.name AS manager_name']);
         return view('admin.projects.list', compact('projects'));
     }
 
@@ -51,7 +51,7 @@ class ProjectController extends Controller
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
                 $image->storeAs('/public/images/projects', $name);
-                $project->image()->create(["image_src" => "images/projects/". $name]);
+                $project->image()->create(["image_src" => "storage/images/projects/". $name]);
             }
             return redirect()->route('project.list')->withInput()->with("success", "Lưu thành công");
         }
@@ -110,7 +110,7 @@ class ProjectController extends Controller
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
                 $image->storeAs('/public/images/projects', $name);
-                $project->image()->create(["image_src" => "images/projects/". $name]);
+                $project->image()->create(["image_src" => "storage/images/projects/". $name]);
             }
         }
         $project->save();
@@ -130,7 +130,7 @@ class ProjectController extends Controller
         return redirect()->route('project.list')->with("success","Xóa thành công");
     }
 
-    public function updateStatus($id, $status)
+    public function updateStatus($status, $id)
     {
         Project::where('id', $id)->update(['status' => $status]);
         return redirect()->route('project.list')->with("success","Cập nhật thành công");
