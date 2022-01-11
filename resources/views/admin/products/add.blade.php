@@ -88,11 +88,11 @@
                                 </div>
                                 <div class="col-md-4" id="district">
                                     <label for="district_id">Quận / Huyện: <span class="text-danger">*</span></label>
-                                    @include('admin.products.includes.district', compact('product'))
+                                    @include('admin.products.includes.district')
                                 </div>
                                 <div class="col-md-4" id="ward">
                                     <label for="ward_id">Xã / Phường: <span class="text-danger">*</span></label>
-                                    @include('admin.products.includes.ward', compact('product'))
+                                    @include('admin.products.includes.ward')
                                 </div>
                             </div>
                         </div>

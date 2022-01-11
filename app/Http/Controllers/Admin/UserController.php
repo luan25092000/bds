@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\User;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.list',compact('categories'));
+        $users =  User::where('role', '<>', 0)->get();
+        return view('admin.users.list', compact('users'));
     }
 
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.add');
+        return view('admin.users.add');
     }
 
     /**
@@ -37,13 +38,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create([
-            'name'  => $request->name
+        User::create([
+            'name'  => $request->name,
+            'email' => $request->email,
+            'password' => md5($request->password),
+            'role' => $request->role
         ]);
-        return redirect()->route('category.list')->with("success", "Lưu thành công");
+        return redirect()->route('customer.list')->with("success", "Lưu thành công");
     }
 
-    /**
+     /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -62,8 +66,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.edit', compact('category'));
+        $user = User::find($id);
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
@@ -75,10 +79,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->save();
-        return redirect()->route('category.list')->with("success", "Cập nhật thành công");
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $check = User::where('password', $request->password)->exists();
+        if (!$check) {
+            $user->password = md5($request->password);
+        }
+        $user->role = $request->role;
+        $user->save();
+        return redirect()->route('customer.list')->with("success", "Cập nhật thành công");
     }
 
     /**
@@ -89,8 +99,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('category.list')->with("success", "Xóa thành công");
+        $user = Customer::find($id);
+        $user->delete();
+        return redirect()->route('customer.list')->with("success", "Xóa thành công");
     }
 }

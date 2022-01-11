@@ -87,10 +87,10 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4" id="district">
-                                    @include('admin.products.includes.district')
+                                    @include('admin.products.includes.district', compact('product'))
                                 </div>
                                 <div class="col-md-4" id="ward">
-                                    @include('admin.products.includes.ward')
+                                    @include('admin.products.includes.ward', compact('product'))
                                 </div>
                             </div>
                         </div>
