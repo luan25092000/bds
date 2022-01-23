@@ -232,3 +232,34 @@
   max-width: 100%;
   width: auto !important;
 }
+
+.pagination {
+  display: flex;
+}
+
+.pagination .page-item {
+  border: 1px solid black;
+  background: black;
+  color: white;
+  padding:0.5rem;
+}
+
+.pagination .page-link {
+  font-size:1.2rem;
+}
+
+.pagination > .active {
+  color:red !important;
+}
+
+.pagination > .disabled {
+  color:grey !important;
+}
+
+.wishlist {
+  width:5px;
+  height:5px;
+  border-radius:5px;
+  background-color:white;
+  color:red;
+}

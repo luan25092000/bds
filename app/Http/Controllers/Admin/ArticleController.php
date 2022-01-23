@@ -49,6 +49,7 @@ class ArticleController extends Controller
                     'description' => $request->content,
                     'category_article_id' => $request->category_article_id,
                     'thumbnail' => '/storage/images/articles/' . $request->image->getClientOriginalName(),
+                    'view' => $request->view
                 ]);
                 return redirect()->route('article.list')->with('success', 'Lưu thành công');
             }
@@ -99,6 +100,7 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->description = $request->content;
         $article->category_article_id = $request->category_article_id;
+        $article->view = $request->view;
         $article->save();
         return redirect()->route('article.list')->with('success', 'Cập nhật thành công');
     }

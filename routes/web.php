@@ -14,17 +14,35 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// Client
+Route::group(['namespace'=>'Client'],function(){
+    Route::get('/login', 'AuthController@showLogin')->name('auth.show.login');
+    Route::post('/login', 'AuthController@login')->name('auth.post.login');
+    Route::get('/register', 'AuthController@showRegister')->name('auth.show.register');
+    Route::post('/register', 'AuthController@register')->name('auth.post.register');
+    Route::get('/logout', 'AuthController@logout')->name('auth.logout');
+    Route::get('/','ClientController@index')->name('home');
+    Route::get('/introduce','ClientController@introduce')->name('introduce');
+    Route::get('/project','ClientController@project')->name('project');
+    Route::get('/article','ClientController@article')->name('article');
+    Route::get('/product/detail/{id}','ClientController@productDetail')->name('product.detail');
+    Route::get('/product/category/{id}','ClientController@productCategory')->name('product.category');
+    Route::get('/wishlist','ClientController@wishlist')->name('wishlist');
+});
+
 // Admin
 Route::namespace('Admin')->prefix('ad')->group(function () {
     Route::get('/', function () {
         if (Auth::check()) {
             if (Auth::user()->role == 0) {
                 return redirect()->route('project.list');
+            } else if (Auth::user()->role == 1) {
+                return redirect()->route('product.list');
             } else {
-               
+                return redirect()->route('admin.form.login')->with('invalid', 'Bạn không có quyền truy cập hệ thống');
             }
         } else {
-            return redirect()->route('admin.form.login');
+            return redirect()->route('admin.form.login')->with('invalid', 'Xin vui lòng đăng nhập');
         }
     });
     // Login, logout

@@ -30,7 +30,8 @@ class Product extends Model
         'water_price',
         'electricity_price',
         'status',
-        'name'
+        'name',
+        'view'
     ];
     protected $table = "products";
 

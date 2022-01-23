@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Category;
+use App\Models\Project;
+use App\Models\Article;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $categories = Category::all();
+        $projects = Project::orderBy('id','DESC')->take(5)->get();
+        $articles = Article::orderBy('id','DESC')->take(5)->get();
+        View::share('categories', $categories);
+        View::share('projects', $projects);
+        View::share('articles', $articles);
     }
 }

@@ -14,6 +14,6 @@ class Article extends Model
      *
      * @var array
      */
-    protected $fillable = ['title','description','thumbnail','category_article_id'];
+    protected $fillable = ['title','description','thumbnail','category_article_id', 'view'];
     protected $table = "articles";
 }

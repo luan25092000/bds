@@ -14,7 +14,7 @@ class Project extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','address','status','manager_id'];
+    protected $fillable = ['name','address','status','manager_id', 'view'];
     protected $table = "projects";
 
     public function image() {

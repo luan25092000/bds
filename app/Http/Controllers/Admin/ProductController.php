@@ -13,6 +13,7 @@ use App\Models\District;
 use App\Models\Ward;
 use App\Models\Media;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -23,10 +24,18 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
-        ->join('projects', 'products.project_id', '=', 'projects.id')
-        ->join('users', 'products.manager_id', '=', 'users.id')
-        ->get(['products.*', 'users.name AS manager_name', 'projects.name AS project_name', 'categories.name AS category_name']);
+        if (Auth::user()->role == 0) {
+            $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('projects', 'products.project_id', '=', 'projects.id')
+            ->join('users', 'products.manager_id', '=', 'users.id')
+            ->get(['products.*', 'users.name AS manager_name', 'projects.name AS project_name', 'categories.name AS category_name']);
+        } else {
+            $products = Product::join('categories', 'products.category_id', '=', 'categories.id')
+            ->join('projects', 'products.project_id', '=', 'projects.id')
+            ->join('users', 'products.manager_id', '=', 'users.id')
+            ->where('products.manager_id', Auth::user()->id)
+            ->get(['products.*', 'users.name AS manager_name', 'projects.name AS project_name', 'categories.name AS category_name']);
+        }
         return view('admin.products.list', compact('products'));
     }
 
@@ -56,7 +65,7 @@ class ProductController extends Controller
             $product = Product::create([
                 'category_id'  => $request->category_id,
                 'project_id'  => $request->project_id,
-                'manager_id' => $request->manager_id,
+                'manager_id' => Auth::user()->role == 0 ? $request->manager_id :  Auth::user()->id,
                 'name' => $request->name,
                 'description' => $request->content,
                 'area' => $request->area,
@@ -68,7 +77,8 @@ class ProductController extends Controller
                 'room_price' => $request->room_price,
                 'electricity_price' => $request->electricity_price,
                 'water_price' => $request->water_price,
-                'is_invalid' => $request->is_invalid
+                'is_invalid' => $request->is_invalid,
+                'view' => $request->view
             ]);
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
@@ -120,7 +130,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->category_id  = $request->category_id;
         $product->project_id  = $request->project_id;
-        $product->manager_id = $request->manager_id;
+        $product->manager_id = Auth::user()->role == 0 ? $request->manager_id :  Auth::user()->id;
         $product->name = $request->name;
         $product->description = $request->content;
         $product->area = $request->area;
@@ -133,6 +143,7 @@ class ProductController extends Controller
         $product->electricity_price = $request->electricity_price;
         $product->water_price = $request->water_price;
         $product->is_invalid = $request->is_invalid;
+        $product->view = $request->view;
         $delete_images_src = [];
         if($request->has('thumbnail_src')) {
             foreach($product->image as $product_thumbnail_src) {

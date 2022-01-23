@@ -32,16 +32,18 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="manager_id">Người quản lý: <span class="text-danger">*</span></label>
-                            <select class="form-control" name="manager_id" id="manager_id" required>
-                                @foreach ($managers as $manager)
-                                    <option value="{{ $manager->id }}">{{ $manager->name }}</option>
-                                @endforeach
-                            </select>
+                    @if (Auth::user()->role == 0)
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="manager_id">Người quản lý: <span class="text-danger">*</span></label>
+                                <select class="form-control" name="manager_id" id="manager_id" required>
+                                    @foreach ($managers as $manager)
+                                        <option value="{{ $manager->id }}">{{ $manager->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="name">Tên sản phẩm: <span class="text-danger">*</span></label>
@@ -53,6 +55,10 @@
                             <label for="content">Mô tả sản phẩm:</label>
                             <textarea class="form-control" id="content" name="content"></textarea>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="view">Lượt xem:</label>
+                        <input type="number" class="form-control" placeholder="Nhập lượt xem" id="view" name="view" min=0 value="0">
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
@@ -80,7 +86,7 @@
                                 <div class="col-md-4">
                                     <label for="city_id">Thành phố: <span class="text-danger">*</span></label>
                                     <select class="form-control" id="city_id" name="city_id" required>
-                                        <option value="">Chọn thành phố</option>
+                                        <option value="">Chọn thành phố</option>"
                                         @foreach ($cities as $city)
                                             <option value="{{ $city->matp }}">{{ $city->name }}</option>
                                         @endforeach

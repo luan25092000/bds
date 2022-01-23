@@ -28,6 +28,10 @@
                         <label for="content">Nội dung:</label>
                         <textarea class="form-control" id="content" name="content" required>{{ $article->description }}</textarea>
                     </div>
+                    <div class="col-md-12">
+                        <label for="view">Lượt xem:</label>
+                        <input type="number" class="form-control" placeholder="Nhập lượt xem" id="view" name="view" min=0 value="{{ $article->view }}">
+                    </div>
                     <div class="form-group">
                         <label for="image">Chọn hình ảnh:</label>
                         <div class="custom-file">

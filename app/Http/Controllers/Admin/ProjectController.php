@@ -46,7 +46,8 @@ class ProjectController extends Controller
             $project = Project::create([
                 'name'  => $request->name,
                 'address' => $request->address,
-                'manager_id' => $request->manager
+                'manager_id' => $request->manager,
+                'view' => $request->view
             ]);
             foreach($request->thumbnail as $image) {
                 $name = $image->getClientOriginalName();
@@ -82,6 +83,7 @@ class ProjectController extends Controller
         $project = Project::find($id);
         $project->name = $request->name;
         $project->address = $request->address;
+        $project->view = $request->view;
         // image progressing
         $delete_images_src = [];
         if($request->has('thumbnail_src')) {

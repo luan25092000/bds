@@ -26,6 +26,10 @@
                         </div>
                     </div>
                     <div class="col-md-12">
+                        <label for="view">Lượt xem:</label>
+                        <input type="number" class="form-control" placeholder="Nhập lượt xem" id="view" name="view" min=0 value="{{ $project->view }}">
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label>Người quản lý <span class="text-danger">*</span></label>
                             <select class="form-control" name="manager" required>
