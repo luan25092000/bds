@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $categories = Category::all();
-        $projects = Project::orderBy('id','DESC')->take(5)->get();
-        $articles = Article::orderBy('id','DESC')->take(5)->get();
+        $projects = Project::orderBy('view', 'DESC')->orderBy('id','DESC')->take(5)->get();
+        $articles = Article::orderBy('view', 'DESC')->orderBy('id','DESC')->take(5)->get();
         View::share('categories', $categories);
         View::share('projects', $projects);
         View::share('articles', $articles);

@@ -28,6 +28,7 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/product/detail/{id}','ClientController@productDetail')->name('product.detail');
     Route::get('/product/category/{id}','ClientController@productCategory')->name('product.category');
     Route::get('/wishlist','ClientController@wishlist')->name('wishlist');
+    Route::get('/article/detail/{id}','ClientController@articleDetail')->name('article.detail');
 });
 
 // Admin

@@ -8,7 +8,7 @@
                 <li class="item">
                     <div class="postImg">
                         <a href="">
-                            <img src="{{ asset($article->image->first()->image_src) }}" alt="{{ $article->title }}" />
+                            <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}" />
                         </a>
                     </div>
                     <div class="text">
