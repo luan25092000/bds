@@ -41,7 +41,7 @@
                     <div class="overHide">
                         <h1 class="logo img">
                             <a href="{{ route('home') }}">
-                                <img src="{{ asset("client/assets/images/logo.png") }}" alt="công ty bất động sản Anh Duy" />
+                                <img src="{{ asset("client/assets/images/logo.png") }}" alt="công ty bất động sản Anh Duy" style="width:50% !important"/>
                             </a>
                         </h1>
                         <div class="slogannone">Công ty bất động sản Anh Duy</div>
@@ -50,7 +50,7 @@
                         <ul class="menuMain">
                             <li class="home"><a href="{{ route('home') }}">Trang chủ</a></li>
                             @foreach ($categories as $category)
-                                <li><a href=''>{{ $category->name }}</a></li>
+                                <li><a href='{{ route('product.category', ['id' => $category->id]) }}'>{{ $category->name }}</a></li>
                             @endforeach
                             <li><a href="{{ route('article') }}">Tin tức</a></li>
                         </ul>

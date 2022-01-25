@@ -57,8 +57,10 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="view">Lượt xem:</label>
-                        <input type="number" class="form-control" placeholder="Nhập lượt xem" id="view" name="view" min=0 value="{{ $product->view }}">
+                        <div class="form-group">
+                            <label for="view">Lượt xem:</label>
+                            <input type="number" class="form-control" placeholder="Nhập lượt xem" id="view" name="view" min=0 value="{{ $product->view }}">
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">

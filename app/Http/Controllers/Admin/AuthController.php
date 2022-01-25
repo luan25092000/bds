@@ -29,7 +29,11 @@ class AuthController extends Controller
         try {
             $result = Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true);
             if ($result) {
-                return redirect()->route('project.list');
+                if (Auth::user()->role == 0) {
+                    return redirect()->route('project.list');
+                } else {
+                    return redirect()->route('product.list');
+                }
             } else {
                 $validator = \Validator::make([], []);
                 $validator->errors()->add('email', 'Email/Mật khẩu không đúng');

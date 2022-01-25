@@ -35,7 +35,7 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
         if (Auth::check()) {
             if (Auth::user()->role == 0) {
                 return redirect()->route('project.list');
-            } else if (Auth::user()->role == 1) {
+            } elseif (Auth::user()->role == 1) {
                 return redirect()->route('product.list');
             } else {
                 return redirect()->route('admin.form.login')->with('invalid', 'Bạn không có quyền truy cập hệ thống');

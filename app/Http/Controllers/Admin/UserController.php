@@ -41,7 +41,7 @@ class UserController extends Controller
         User::create([
             'name'  => $request->name,
             'email' => $request->email,
-            'password' => md5($request->password),
+            'password' => bcrypt($request->password),
             'role' => $request->role
         ]);
         return redirect()->route('customer.list')->with("success", "Lưu thành công");
@@ -82,10 +82,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        $check = User::where('password', $request->password)->exists();
-        if (!$check) {
-            $user->password = md5($request->password);
-        }
+        $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->save();
         return redirect()->route('customer.list')->with("success", "Cập nhật thành công");
