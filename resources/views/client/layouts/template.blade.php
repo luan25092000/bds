@@ -29,7 +29,6 @@
                     <div class="right">
                         <div class="menu-top">
                             <a href="{{ route('auth.show.login') }}">Đăng nhập</a>
-                            <a href="{{ route('auth.show.register') }}">Đăng ký</a>
                             <a href="{{ route('introduce') }}">Giới thiệu</a>
                             <a href="{{ route('project') }}">Dự án</a>
                             <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">0</sup></a>
@@ -82,7 +81,7 @@
                     <div class="infocompay-footer left">
                         <h1>Công ty bất động sản Anh Duy</h1>
                         <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: </p>
-                        <p><i class="fas fa-phone-volume"></i> Điện thoại: <a href="tel:0123456789">0123456789</a></p>
+                        <p><i class="fas fa-phone-volume"></i> Điện thoại: <a href="tel:0355969717">0355969717</a></p>
                         <p style="display:block;"><i class="fas fa-envelope"></i> Email: <a href="mailto:anhduy@gmail.com">anhduy@gmail.com</a></p>
                     </div>
 
@@ -106,14 +105,14 @@
         <a href="#0" class="cd-top" style="margin-right:3rem;"><i class="fab fa-angle-up" aria-hidden="true"></i></a>
         <div class="hotline-fixed clearfm">
             <div class="hotline-icon"><i class="fab fa-phone" aria-hidden="true"></i></div>
-            <div class="hotline-number"><a href="tel:0123456789" class="sdt sdt1">
-                Anh Duy: 0123456789</a>
+            <div class="hotline-number"><a href="tel:0355969717" class="sdt sdt1">
+                Anh Duy: 0355969717</a>
                 <div class="close"></div>
             </div>
         </div>
     </div>
     <div class="mzalo">
-        <a href="http://zalo.me/0123456789" target="_blank"
+        <a href="http://zalo.me/0355969717" target="_blank"
             style="display:block;width:100%;height:100%;position:relative;">
             <img src="{{ asset("client/assets/images/mzalo.png") }}" style="position: absolute;left: 0;bottom: 0;width: 50px;height: 50px;" />
         </a>

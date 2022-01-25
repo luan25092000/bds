@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['namespace'=>'Client'],function(){
     Route::get('/login', 'AuthController@showLogin')->name('auth.show.login');
     Route::post('/login', 'AuthController@login')->name('auth.post.login');
-    Route::get('/register', 'AuthController@showRegister')->name('auth.show.register');
-    Route::post('/register', 'AuthController@register')->name('auth.post.register');
     Route::get('/logout', 'AuthController@logout')->name('auth.logout');
     Route::get('/','ClientController@index')->name('home');
     Route::get('/introduce','ClientController@introduce')->name('introduce');
