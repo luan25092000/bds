@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\CategoryArticle;
+use App\Models\Contact;
+Use Alert;
 
 class ClientController extends Controller
 {
@@ -62,5 +64,23 @@ class ClientController extends Controller
         $relationArticle = Article::inRandomOrder()->where('id','<>',$id)->orderBy('view', 'DESC')->orderBy('id','DESC')->limit(12)->get();
 
         return view('client.article-detail', compact('article', 'relationArticle'));
+    }
+
+    public function contact() 
+    {
+        return view('client.contact');
+    }
+
+    public function postContact(Request $request) 
+    {
+        $data = $request->all();
+        Contact::create([
+            'fullname' => $data['fullname'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'description' => $data['description']
+        ]);
+        Alert::success('Success', 'Gửi thành công');
+        return view('client.contact');
     }
 }

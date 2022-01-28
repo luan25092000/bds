@@ -78,7 +78,16 @@
                     <!-- /.nav-second-level -->
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-usd" aria-hidden="true"></i> Hợp đồng<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Liên hệ<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('contact.list') }}">Danh sách</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-usd" aria\hidden="true"></i> Hợp đồng<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="{{ route('order.list') }}">Danh sách</a>

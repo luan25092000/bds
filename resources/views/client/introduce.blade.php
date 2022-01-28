@@ -9,6 +9,7 @@
                 <div class="boxes">
                     <div class="title-cat">
                         <span>
+                            Giới thiệu
                         </span>
                     </div>
                     <h1 class="title-article">Chào mừng quý khách đến với công ty kiến trúc Anh Duy</h1>

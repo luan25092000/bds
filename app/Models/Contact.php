@@ -15,5 +15,5 @@ class Contact extends Model
      * @var array
      */
     protected $fillable = ['fullname', 'phone', 'email', 'description'];
-    protected $table = "category_articles";
+    protected $table = "contacts";
 }

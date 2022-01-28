@@ -27,6 +27,8 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/product/category/{id}','ClientController@productCategory')->name('product.category');
     Route::get('/wishlist','ClientController@wishlist')->name('wishlist');
     Route::get('/article/detail/{id}','ClientController@articleDetail')->name('article.detail');
+    Route::get('/contact','ClientController@contact')->name('contact');
+    Route::post('/contact','ClientController@postContact')->name('post.contact');
 });
 
 // Admin
@@ -41,7 +43,7 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
                 return redirect()->route('admin.form.login')->with('invalid', 'Bạn không có quyền truy cập hệ thống');
             }
         } else {
-            return redirect()->route('admin.form.login')->with('invalid', 'Xin vui lòng đăng nhập');
+            return redirect()->route('admin.form.login');
         }
     });
     // Login, logout
@@ -145,6 +147,10 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::post('add','ArticleController@store')->name('article.add');
             
             Route::get('delete/{id}','ArticleController@destroy')->name('article.delete');
+        });
+        // Contact
+        Route::group(['prefix'=>'contact'],function(){
+            Route::get('list','ContactController@index')->name('contact.list');
         });
         // Order
         Route::group(['prefix'=>'order'],function(){

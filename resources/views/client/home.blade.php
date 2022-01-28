@@ -62,8 +62,8 @@
                     </a>
                 </div>
                 <div class="contain clearfm">
-                    @include('client.article.left', compact('leftArticle'))
-                    @include('client.article.right', compact('rightArticle'))
+                    @include('client.includes.article-left', compact('leftArticle'))
+                    @include('client.includes.article-right', compact('rightArticle'))
                 </div>
             </div>
         </div>

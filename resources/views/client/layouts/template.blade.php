@@ -16,10 +16,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/FlexSlider2/css/flexslider.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/malihu-custom-scrollbar/jquery.mCustomScrollbar.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/fontawesome/css/all.css") }}" />
+    <script type="text/javascript" src="{{ asset("vendor/sweetalert/sweetalert2.all.js") }}"></script>
     <title>@yield('title')</title>
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div class="overAll">
         <header>
             <div class="top-content">
@@ -28,8 +30,20 @@
                     <div class="left hotline"><a href="/">Công ty bất động sản Anh Duy</a></div>
                     <div class="right">
                         <div class="menu-top">
-                            <a href="{{ route('auth.show.login') }}">Đăng nhập</a>
+                            @if (!Auth::check())
+                                <a href="{{ route('auth.show.login') }}">Đăng nhập</a>
+                            @else
+                                <a href="javascript:void(0)">Xin chào {{ Auth::user()->name }}</a>
+                                <a href="{{ route('auth.logout') }}">Đăng xuất</a>
+                            @endif
                             <a href="{{ route('introduce') }}">Giới thiệu</a>
+                            @if (Auth::check())
+                                @can('customer')
+                                    <a href="{{ route('contact') }}">Liên hệ</a>
+                                @endcan
+                            @else
+                                <a href="{{ route('contact') }}">Liên hệ</a>
+                            @endif
                             <a href="{{ route('project') }}">Dự án</a>
                             <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">0</sup></a>
                         </div>
