@@ -31,6 +31,7 @@
                         <th>Số điện thoại</th>
                         <th>Email</th>
                         <th>Nội dung</th>
+                        <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody align="center">
@@ -42,6 +43,9 @@
                             <td>{{ $contact->phone }}</td>
                             <td>{{ $contact->email }}</td>
                             <td>{{ $contact->description }}</td>
+                            <td>
+                                <a href="{{ route('contact.delete',['id' => $contact->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </td>
                         </tr>
                     @php $count++; @endphp
                     @endforeach

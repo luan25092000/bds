@@ -1,5 +1,4 @@
-<label for="ward_id">Xã / Phường: <span class="text-danger">*</span></label>
-<select class="form-control" id="ward_id" name="ward_id" required>
+<select class="search input" id="ward_id" name="ward_id">
     <option value="">Chọn xã / phường</option>
     @if (isset($wards))
         @foreach ($wards as $ward)

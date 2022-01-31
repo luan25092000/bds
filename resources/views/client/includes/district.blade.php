@@ -1,5 +1,4 @@
-<label for="district_id">Quận / Huyện: <span class="text-danger">*</span></label>
-<select class="form-control" id="district_id" name="district_id" required>
+<select class="search input" id="district_id" name="district_id">
     <option value="">Chọn quận / huyện</option>
     @if (isset($districts))
         @foreach ($districts as $district)

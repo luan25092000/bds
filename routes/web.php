@@ -29,6 +29,13 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/article/detail/{id}','ClientController@articleDetail')->name('article.detail');
     Route::get('/contact','ClientController@contact')->name('contact');
     Route::post('/contact','ClientController@postContact')->name('post.contact');
+    Route::get('/add-wishlist', 'ClientController@addWishlist');
+    Route::get('/wishlist','ClientController@wishlist')->name('wishlist');
+    Route::get('/delete/wishlist/id/{id}','ClientController@deleteWishlist')->name('wishlist.delete');
+    Route::get('/contract/wishlist/id/{id}','ClientController@contractWishlist')->name('wishlist.contract');
+    Route::post('/search','ClientController@postSearch')->name('post.search');
+    Route::get('/ajax_district','ClientController@ajaxDistrict');
+    Route::get('/ajax_ward','ClientController@ajaxWard');
 });
 
 // Admin
@@ -151,6 +158,8 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
         // Contact
         Route::group(['prefix'=>'contact'],function(){
             Route::get('list','ContactController@index')->name('contact.list');
+
+            Route::get('delete/{id}','ContactController@destroy')->name('contact.delete');
         });
         // Order
         Route::group(['prefix'=>'order'],function(){

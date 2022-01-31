@@ -14,6 +14,6 @@ class Wishlist extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id'];
+    protected $fillable = ['product_id', 'user_id'];
     protected $table = "wishlists";
 }

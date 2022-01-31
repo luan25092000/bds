@@ -1,6 +1,6 @@
 @extends('client.layouts.template')
 
-@section('title', 'Liên hệ')
+@section('title', 'Ký hợp đồng')
 
 @section('content')
     <style>
@@ -38,10 +38,9 @@
                 <div class="boxes">
                     <div class="title-cat">
                         <span>
-                            Liên hệ
+                            Ký hợp đồng
                         </span>
                     </div>
-                    <h1 class="title-article">Nếu quý khách có bất kì vấn đề gì, xin vui lòng để lại liên hệ cho chúng tôi, chúng tôi sẽ liên hệ cho quý khách trong thời gian sớm nhất, xin cảm ơn !</h1>
                     <div>
                         <form action="{{ route('post.contact') }}" method="POST">
 

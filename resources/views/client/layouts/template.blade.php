@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/malihu-custom-scrollbar/jquery.mCustomScrollbar.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/fontawesome/css/all.css") }}" />
     <script type="text/javascript" src="{{ asset("vendor/sweetalert/sweetalert2.all.js") }}"></script>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <title>@yield('title')</title>
 </head>
 
@@ -45,7 +46,9 @@
                                 <a href="{{ route('contact') }}">Liên hệ</a>
                             @endif
                             <a href="{{ route('project') }}">Dự án</a>
-                            <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">0</sup></a>
+                            @canany(['manager', 'staff'])
+                                <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">{{ \App\Models\Wishlist::where('user_id', Auth::user()->id)->get()->count() }}</sup></a>
+                            @endcanany
                         </div>
                     </div>
                 </div>
@@ -87,6 +90,52 @@
                     @endfor
                 </div>
             </div>
+            <div class="form-container">
+                <form method="POST" action="{{ route('post.search') }}">
+
+                    @csrf
+
+                    <div class="wrapper">
+                        <p style="color:white;">Tìm kiếm sản phẩm</p>
+                        <div class="search-container">
+                            <select name="category" class="search input">
+                                <option value="">Tất cả danh mục</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            <select name="price" class="search input">
+                                <option value="">Tất cả mức giá</option>
+                                <option value="0">< 500 triệu</option>
+                                <option value="1">500 triệu - 1 tỷ</option>
+                                <option value="2">> 1 tỷ</option>
+                            </select>
+                            <select name="area" class="search input">
+                                <option value="">Tất cả diện tích</option>
+                                <option value="0">≤ 30 m²</option>
+                                <option value="1">30 - 50 m²</option>
+                                <option value="2">> 50 m²</option>
+                            </select>
+                            @php
+                                $cities = \App\Models\City::all();
+                            @endphp
+                            <select name="city_id" id="city_id" class="search input">
+                                <option value="">Chọn thành phố</option>"
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->matp }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
+                            <div id="district">
+                                @include('client.includes.district')
+                            </div>
+                            <div id="ward">
+                                @include('client.includes.ward')
+                            </div>
+                            <button type="submit" class="button">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </header>
         @yield('content')
         <footer>
@@ -94,7 +143,7 @@
                 <div class="container overHide clearfm">
                     <div class="infocompay-footer left">
                         <h1>Công ty bất động sản Anh Duy</h1>
-                        <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: </p>
+                        <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: Hà Nội</p>
                         <p><i class="fas fa-phone-volume"></i> Điện thoại: <a href="tel:0355969717">0355969717</a></p>
                         <p style="display:block;"><i class="fas fa-envelope"></i> Email: <a href="mailto:anhduy@gmail.com">anhduy@gmail.com</a></p>
                     </div>
@@ -132,13 +181,13 @@
         </a>
     </div>
     <div class="mmap">
-        <a href=""
+        <a href="https://goo.gl/maps/agJvzbEVCb66k41s8"
             target="_blank" style="display:block;width:100%;height:100%;position:relative;">
             <img src="{{ asset("client/assets/images/icon-maps2.png") }}" style="position: absolute;left: 0;bottom: 0;width: 50px;" />
         </a>
     </div>
     <div class="yt">
-        <a href="" target="_blank"
+        <a href="https://youtu.be/m4YJT2su1aY" target="_blank"
             style="display:block;width:100%;height:100%;position:relative;">
             <img src="{{ asset("client/assets/images/icon-youtube.png") }}" style="display:block; width: 50px;" />
         </a>
@@ -158,6 +207,44 @@
     <script type="text/javascript" src="{{ asset("client/assets/scripts/ScrollToFixed/jquery-scrolltofixed-min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("client/assets/scripts/ScrollToFixed/jquery.sticky-kit.min.js") }}"></script>
     <script type="text/javascript" src="{{ asset("client/assets/scripts/js/script.js") }}"></script>
+    <script type="text/javascript" src="{{ asset("client/assets/scripts/js/add-wishlist.js") }}"></script>
+    <script>
+        // Handle choose city,district,ward
+        $('#city_id').change(function(e){
+            var city_id = $(this).val();
+            $.ajax({
+                url: "/ajax_district",
+                type: 'GET',
+                data: {
+                    city_id:city_id
+                },
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                }
+            }).done(function(res){
+                if (res.status == 200) {
+                    $('#district').html(res.data);
+                }
+            });
+        });
+        $('#district').on('change', '#district_id', function(e){
+            var district_id = $(this).val();
+            $.ajax({
+                url: "/ajax_ward",
+                type: 'GET',
+                data: {
+                    district_id:district_id
+                },
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                }
+            }).done(function(res){
+                if (res.status == 200) {
+                    $('#ward').html(res.data);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

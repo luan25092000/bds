@@ -18,7 +18,7 @@
                     <div class="contain overHide clearfm">
                         <ul class="overHide feature-home">
                             @php
-                                $products = \App\Models\Product::where('category_id', $category->id)->take(8)->orderBy('view', 'DESC')->orderBy('id', 'DESC')->get();
+                                $products = \App\Models\Product::where('category_id', $category->id)->where('status',1)->take(8)->orderBy('view', 'DESC')->orderBy('id', 'DESC')->get();
                             @endphp
                             @foreach ($products as $product)
                                 <li class="item">

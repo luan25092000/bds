@@ -1,6 +1,6 @@
 @extends('client.layouts.template')
 
-@section('title',$title)
+@section('title','Kết quả tìm kiếm')
 
 @section('content')
 <article id="Wrapper" class="Section">
@@ -8,7 +8,7 @@
         <section class="col-section">
             <div class="boxes">
                 <div class="title-cat">
-                    <span id="ctl00_ContentPlaceHolder1_lbTitleCat">{{ $title }}</span>
+                    <span id="ctl00_ContentPlaceHolder1_lbTitleCat">Kết quả tìm kiếm</span>
                 </div>
                 <div class="contain border clearfm">
                     @if (count($products) > 0)
@@ -34,7 +34,7 @@
                             @endforeach
                         </ul>
                     @else
-                        <div style="color:white; font-size:1.2rem;">Nội dung chúng tôi sẽ cập nhật sau</div>
+                        <div style="color:white; font-size:1.2rem;">Không có kết quả tìm kiếm nào</div>
                     @endif
                     {{ $products->links() }}
                 </div>
