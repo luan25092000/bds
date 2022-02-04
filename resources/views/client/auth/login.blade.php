@@ -47,10 +47,10 @@
 
                             @csrf
 
-                            <label for="email">Email</label>
+                            <label for="email">Email <span style="color:red;">*</span></label>
                             <input type="email" id="email" name="email" placeholder="Nhập email" required>
 
-                            <label for="password">Mật khẩu</label>
+                            <label for="password">Mật khẩu <span style="color:red;">*</span></label>
                             <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
 
                             <input type="submit" value="Đăng nhập">

@@ -27,13 +27,51 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Họ tên</th>
-                        <th>Số điện thoại</th>
+                        <th>Sản phẩm</th>
+                        <th>Họ tên khách hàng</th>
                         <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Nhân viên</th>
+                        <th>Ghi chú</th>
+                        <th>Trạng thái</th>
+                        <th>Thời gian cập nhật</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
                 <tbody align="center">
+                    @php
+                        $count = 1;
+                    @endphp
+                    @foreach ($orders as $order)
+                        <tr>
+                            <td>{{ $count }}</td>
+                            <td>{{ \App\Models\Product::find($order->product_id)->name }}</td>
+                            <td>{{ $order->fullname }}</td>
+                            <td>{{ $order->email }}</td> 
+                            <td>{{ $order->phone }}</td>
+                            <td>{{ \App\Models\User::find($order->staff_id)->name }}</td>
+                            <td>{{ !is_null($order->description) ? $order->description : 'N/A' }}</td>
+                            <td>
+                                @if ($order->status == 0)
+                                    Đã xem
+                                @else
+                                    Đã chốt
+                                @endif
+                            </td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }}</td>
+                            <td>
+                                @if ($order->status == 0)
+                                    <a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                    <a href="{{ route('order.done',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Bạn muốn chốt hợp đồng này ?')"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                                @elseif ($order->status == 1)
+                                    <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                @endif
+                            </td>
+                        </tr>
+                        @php
+                            $count++;
+                        @endphp
+                    @endforeach
                 </tbody>
             </table>
         </div>

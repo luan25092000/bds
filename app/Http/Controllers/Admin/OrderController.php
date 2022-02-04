@@ -71,7 +71,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+        $order->status = 1;
+        $order->save();
+        return redirect()->route('order.list')->with("success","Cập nhật thành công");
     }
 
     /**
@@ -82,6 +85,8 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return redirect()->route('order.list')->with("success","Xóa thành công");
     }
 }

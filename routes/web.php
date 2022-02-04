@@ -23,10 +23,14 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/introduce','ClientController@introduce')->name('introduce');
     Route::get('/project','ClientController@project')->name('project');
     Route::get('/article','ClientController@article')->name('article');
-    Route::get('/product/detail/{id}','ClientController@productDetail')->name('product.detail');
+    Route::group(['middleware' => 'filter.product'], function() {
+        Route::get('/product/detail/{id}','ClientController@productDetail')->name('product.detail');
+    });
     Route::get('/product/category/{id}','ClientController@productCategory')->name('product.category');
     Route::get('/wishlist','ClientController@wishlist')->name('wishlist');
-    Route::get('/article/detail/{id}','ClientController@articleDetail')->name('article.detail');
+    Route::group(['middleware' => 'filter.article'], function() {
+        Route::get('/article/detail/{id}','ClientController@articleDetail')->name('article.detail');
+    });
     Route::get('/contact','ClientController@contact')->name('contact');
     Route::post('/contact','ClientController@postContact')->name('post.contact');
     Route::get('/add-wishlist', 'ClientController@addWishlist');
@@ -36,6 +40,7 @@ Route::group(['namespace'=>'Client'],function(){
     Route::post('/search','ClientController@postSearch')->name('post.search');
     Route::get('/ajax_district','ClientController@ajaxDistrict');
     Route::get('/ajax_ward','ClientController@ajaxWard');
+    Route::post('/contract/{id}','ClientController@postContract')->name('post.contract');
 });
 
 // Admin
@@ -165,7 +170,11 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
         Route::group(['prefix'=>'order'],function(){
             Route::get('list','OrderController@index')->name('order.list');
 
-            Route::post('edit/{id}','OrderController@update')->name('order.edit');
+            Route::get('delete/{id}','OrderController@destroy')->name('order.delete');
+
+            Route::get('done/{id}','OrderController@update')->name('order.done');
+
+            Route::get('sendbill/{id}','OrderController@sendBill')->name('order.send.bill');
         });
     });
 });

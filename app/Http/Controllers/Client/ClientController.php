@@ -13,8 +13,10 @@ use App\Models\Contact;
 use App\Models\Wishlist;
 use App\Models\District;
 use App\Models\Ward;
+use App\Models\Order;
 use Alert;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 
 class ClientController extends Controller
 {
@@ -47,7 +49,8 @@ class ClientController extends Controller
         }
         $product = Product::with("image")->join('categories','products.category_id','=','categories.id')->where('products.id', $id)->select(['products.*', 'categories.name AS category_name'])->first();
         $relationProduct = Product::inRandomOrder()->where('id','<>',$id)->orderBy('view', 'DESC')->orderBy('id','DESC')->limit(12)->get();
-
+        // increment product view
+        Event::dispatch('product.view', $product);
         return view('client.product-detail', compact('product', 'relationProduct', 'wishlists'));
     }
 
@@ -71,7 +74,8 @@ class ClientController extends Controller
     public function articleDetail($id) {
         $article = Article::join('category_articles','articles.category_article_id','=','category_articles.id')->where('articles.id', $id)->select(['articles.*', 'category_articles.name AS category_name'])->first();
         $relationArticle = Article::inRandomOrder()->where('id','<>',$id)->orderBy('view', 'DESC')->orderBy('id','DESC')->limit(12)->get();
-
+        // increment article view
+        Event::dispatch('article.view', $article);
         return view('client.article-detail', compact('article', 'relationArticle'));
     }
 
@@ -185,5 +189,20 @@ class ClientController extends Controller
             'status' => 200,
             'data' => view('client.includes.ward', compact('wards'))->render()
         ]);
+    }
+
+    public function postContract($id, Request $request)
+    {
+        $data = $request->all();
+        Order::create([
+            'fullname' => $data['fullname'],
+            'phone' => $data['phone'],
+            'email' => $data['email'],
+            'product_id' => Wishlist::find($id)->product_id,
+            'staff_id' => Auth::user()->id,
+            'description' => $data['description']
+        ]);
+        Alert::success('Success', 'Gửi thành công');
+        return redirect()->route('home');
     }
 }

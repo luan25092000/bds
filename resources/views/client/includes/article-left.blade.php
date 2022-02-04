@@ -2,7 +2,7 @@
     <div class="feature-category">
         <div class="postImg">
             <a
-                href="">
+                href="{{ route('article.detail', ['id' => $item->id]) }}">
                 <img src="{{ asset($item->thumbnail) }}"
                     alt="{{ $item->title }}" />
             </a>
@@ -10,7 +10,7 @@
         </div>
         <h4>
             <a
-                href="">
+                href="{{ route('article.detail', ['id' => $item->id]) }}">
                 {{ $item->title }}
             </a>
         </h4>

@@ -4,7 +4,7 @@
             <li class="item">
                 <div class="postImg">
                     <a
-                        href="">
+                        href="{{ route('article.detail', ['id' => $item->id]) }}">
                         <img src="{{ asset($item->thumbnail) }}"
                             alt="{{ $item->title }}" />
                     </a>
@@ -13,7 +13,7 @@
                 <div class="text">
                     <h4>
                         <a
-                            href="">
+                            href="{{ route('article.detail', ['id' => $item->id]) }}">
                             {{ $item->title }}
                         </a>
                     </h4>

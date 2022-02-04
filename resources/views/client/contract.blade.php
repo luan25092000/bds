@@ -41,22 +41,25 @@
                             Ký hợp đồng
                         </span>
                     </div>
-                    <div>
-                        <form action="{{ route('post.contact') }}" method="POST">
+                    <div style="margin-top:1rem;">
+                        <form action="{{ route('post.contract', compact('id')) }}" method="POST">
 
                             @csrf
 
-                            <label for="fullname">Họ tên</label>
-                            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ tên" value="{{ Auth::check() ? Auth::user()->name : '' }}" required>
+                            <label for="product">Sản phẩm</label>
+                            <input type="text" id="product" name="product" value="{{ \App\Models\Product::find(\App\Models\Wishlist::find($id)->product_id)->name }}" readonly>
 
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Nhập email" value="{{ Auth::check() ? Auth::user()->email : '' }}" required>
+                            <label for="fullname">Họ tên <span style="color:red;">*</span></label>
+                            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ tên khách hàng" required>
 
-                            <label for="phone">Số điện thoại</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+                            <label for="email">Email <span style="color:red;">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="Nhập email khách hàng" required>
 
-                            <label for="description">Nội dung</label>
-                            <textarea id="description" name="description" cols="30" rows="5" required></textarea>
+                            <label for="phone">Số điện thoại <span style="color:red;">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại khách hàng" pattern="[0-9]{10}" required>
+
+                            <label for="description">Ghi chú</label>
+                            <textarea id="description" name="description" cols="30" rows="5"></textarea>
 
                             <input type="submit" value="Gửi">
                         </form>

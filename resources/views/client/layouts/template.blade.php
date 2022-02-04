@@ -3,6 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href='{{ asset("client/assets/images/logo.png") }}' type="image/png" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/css/public8e5e.css?v=15") }}" />
@@ -16,8 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/FlexSlider2/css/flexslider.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/malihu-custom-scrollbar/jquery.mCustomScrollbar.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/fontawesome/css/all.css") }}" />
-    <script type="text/javascript" src="{{ asset("vendor/sweetalert/sweetalert2.all.js") }}"></script>
-    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+    <script type="text/javascript" src="{{ asset("vendor/sweetalert/sweetalert.all.js") }}"></script>
     <title>@yield('title')</title>
 </head>
 
