@@ -7,13 +7,13 @@
             @foreach ($articles as $article)
                 <li class="item">
                     <div class="postImg">
-                        <a href="">
+                        <a href="{{ route('article.detail', ['id' => $article->id]) }}">
                             <img src="{{ asset($article->thumbnail) }}" alt="{{ $article->title }}" />
                         </a>
                     </div>
                     <div class="text">
                         <h4>
-                            <a href="">
+                            <a href="{{ route('article.detail', ['id' => $article->id]) }}">
                                 {{ $article->title }}
                             </a>
                         </h4>

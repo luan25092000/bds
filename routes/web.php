@@ -41,6 +41,7 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/ajax_district','ClientController@ajaxDistrict');
     Route::get('/ajax_ward','ClientController@ajaxWard');
     Route::post('/contract/{id}','ClientController@postContract')->name('post.contract');
+    Route::get('/bill','ClientController@bill')->name('bill');
 });
 
 // Admin
@@ -175,6 +176,12 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::get('done/{id}','OrderController@update')->name('order.done');
 
             Route::get('sendbill/{id}','OrderController@sendBill')->name('order.send.bill');
+
+            Route::post('add/{id}','OrderController@store')->name('customer.order.add');
+        });
+         // Bill
+         Route::group(['prefix'=>'bill'],function(){
+            Route::get('list','BillController@index')->name('bill.list');
         });
     });
 });

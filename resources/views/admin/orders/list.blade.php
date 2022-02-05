@@ -64,7 +64,11 @@
                                     <a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     <a href="{{ route('order.done',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Bạn muốn chốt hợp đồng này ?')"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
                                 @elseif ($order->status == 1)
-                                    <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                    @if (date('t') == date('j'))
+                                        <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                    @else
+                                        <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Hôm nay chưa phải là cuối tháng, bạn có chắc chắn muốn gửi hóa đơn về cho khách hàng ?')"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                    @endif
                                 @endif
                             </td>
                         </tr>

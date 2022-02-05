@@ -95,6 +95,15 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
+                <li>
+                    <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Hóa đơn<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('bill.list') }}">Danh sách</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
             @else 
                 <li>
                     <a href="#"><i class="fa fa-home" aria-hidden="true"></i> Sản phẩm<span class="fa arrow"></span></a>
@@ -113,6 +122,15 @@
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="{{ route('order.list') }}">Danh sách</a>
+                        </li>
+                    </ul>
+                    <!-- /.nav-second-level -->
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-bell" aria-hidden="true"></i> Hóa đơn<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ route('bill.list') }}">Danh sách</a>
                         </li>
                     </ul>
                     <!-- /.nav-second-level -->

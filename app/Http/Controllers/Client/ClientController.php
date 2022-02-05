@@ -14,6 +14,7 @@ use App\Models\Wishlist;
 use App\Models\District;
 use App\Models\Ward;
 use App\Models\Order;
+use App\Models\Bill;
 use Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -204,5 +205,10 @@ class ClientController extends Controller
         ]);
         Alert::success('Success', 'Gửi thành công');
         return redirect()->route('home');
+    }
+
+    public function bill() {
+        $bills = Bill::orderBy('id','DESC')->get();
+        return view('client.bill', compact('bills'));
     }
 }

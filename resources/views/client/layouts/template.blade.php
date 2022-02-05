@@ -36,6 +36,9 @@
                             @else
                                 <a href="javascript:void(0)">Xin chào {{ Auth::user()->name }}</a>
                                 <a href="{{ route('auth.logout') }}">Đăng xuất</a>
+                                @can('customer')
+                                    <a href="{{ route('bill') }}">Hóa đơn<sup>{{ \App\Models\Bill::where('user_id', Auth::user()->id)->get()->count() }}</sup></a>
+                                @endcan
                             @endif
                             <a href="{{ route('introduce') }}">Giới thiệu</a>
                             @if (Auth::check())
