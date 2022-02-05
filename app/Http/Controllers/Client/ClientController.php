@@ -35,7 +35,8 @@ class ClientController extends Controller
     }
 
     public function project() {
-        return view('client.project');
+        $projects = Project::with("image")->orderBy('view', 'DESC')->orderBy('id','DESC')->paginate(12, ['*'],'project');
+        return view('client.project', compact('projects'));
     }
 
     public function article() {
@@ -208,7 +209,16 @@ class ClientController extends Controller
     }
 
     public function bill() {
-        $bills = Bill::orderBy('id','DESC')->get();
+        $bills = Bill::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get();
         return view('client.bill', compact('bills'));
+    }
+
+    public function projectDetail($id)
+    {
+        $project = Project::with("image")->first();
+        $relationProject = Project::inRandomOrder()->where('id','<>',$id)->orderBy('view', 'DESC')->orderBy('id','DESC')->limit(12)->get();
+        // increment project view
+        Event::dispatch('project.view', $project);
+        return view('client.project-detail', compact('project', 'relationProject'));
     }
 }

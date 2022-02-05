@@ -22,6 +22,9 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/','ClientController@index')->name('home');
     Route::get('/introduce','ClientController@introduce')->name('introduce');
     Route::get('/project','ClientController@project')->name('project');
+    Route::group(['middleware' => 'filter.project'], function() {
+        Route::get('/project/detail/{id}','ClientController@projectDetail')->name('project.detail');
+    });
     Route::get('/article','ClientController@article')->name('article');
     Route::group(['middleware' => 'filter.product'], function() {
         Route::get('/product/detail/{id}','ClientController@productDetail')->name('product.detail');
@@ -175,13 +178,15 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
 
             Route::get('done/{id}','OrderController@update')->name('order.done');
 
-            Route::get('sendbill/{id}','OrderController@sendBill')->name('order.send.bill');
+            Route::get('send-bill/{id}','OrderController@sendBill')->name('order.send.bill');
 
             Route::post('add/{id}','OrderController@store')->name('customer.order.add');
         });
          // Bill
          Route::group(['prefix'=>'bill'],function(){
             Route::get('list','BillController@index')->name('bill.list');
+
+            Route::get('update-status/{id}','BillController@update')->name('bill.update.status');
         });
     });
 });

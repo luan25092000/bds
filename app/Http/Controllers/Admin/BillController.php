@@ -71,7 +71,10 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bill = Bill::find($id);
+        $bill->status = 1;
+        $bill->save();
+        return redirect()->route('bill.list')->with('success', 'Xác nhận thành công');
     }
 
     /**

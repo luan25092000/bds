@@ -29,5 +29,6 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen('product.view', 'App\Events\ViewProductHandler');
         Event::listen('article.view', 'App\Events\ViewArticleHandler');
+        Event::listen('project.view', 'App\Events\ViewProjectHandler');
     }
 }

@@ -43,16 +43,15 @@
                         <table id="wishlist">
                             <tr>
                                 <th>Sản phẩm</th>
-                                <th>Tiền thuê</th>
-                                <th>Tiền điện + nước</th>
+                                <th>Tiền cần phải trả (thuê hằng tháng + điện + nước)</th>
                                 <th>Tháng</th>
                                 <th>Trạng thái</th>
+                                <th>Thời gian cập nhật</th>
                             </tr>
                             @foreach ($bills as $bill)
                                 <tr>
                                     <td>{{ \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
-                                    <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price,-3,',',',') }}₫</td>
-                                    <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
+                                    <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
                                     <td>{{ date('m', strtotime($bill->created_at)) }}</td>
                                     <td>
                                         @if ($bill->status == 0)
@@ -61,11 +60,12 @@
                                             Đã thanh toán
                                         @endif
                                     </td>
+                                    <td>{{ date('d/m/Y H:i:s', strtotime($bill->updated_at)) }}</td>
                                 </tr>
                             @endforeach
                         </table>
                     @else
-                        <a href="javascript:void(0)" style="color:white; font-size:1.2rem;margin-top:1rem;">Hiện tại chưa có hóa đơn nào</a>
+                        <div style="color:white; font-size:1.2rem;">Hiện tại chưa có hóa đơn nào</div>
                     @endif
                 </div>
             </section>

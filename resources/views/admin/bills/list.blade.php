@@ -30,8 +30,7 @@
                         <th>Khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Sản phẩm</th>
-                        <th>Tiền thuê</th>
-                        <th>Tiền điện + nước</th>
+                        <th>Tiền cần phải trả (thuê hằng tháng + điện + nước)</th>
                         <th>Tháng</th>
                         <th>Trạng thái</th>
                         <th>Thời gian cập nhật</th>
@@ -48,8 +47,7 @@
                             <td>{{ \App\Models\User::find($bill->user_id)->name }}</td>
                             <td>{{ \App\Models\Order::where('email',\App\Models\User::find($bill->user_id)->email)->first()->phone }}</td>
                             <td>{{ \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
-                            <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price,-3,',',',') }}₫</td>
-                            <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
+                            <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
                             <td>{{ date('m', strtotime($bill->created_at)) }}</td>
                             <td>
                                 @if ($bill->status == 0)
@@ -60,7 +58,9 @@
                             </td>
                             <td>{{ date('d/m/Y H:i:s', strtotime($bill->updated_at)) }}</td>
                             <td>
-                                
+                                @if ($bill->status == 0)
+                                    <a href="{{ route('bill.update.status',['id' => $bill->id]) }}" onclick="return confirm('Bạn muốn xác nhận hóa đơn này ?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                @endif
                             </td>
                         </tr>
                         @php

@@ -7,13 +7,13 @@
             @foreach ($projects as $project)
                 <li class="item">
                     <div class="postImg">
-                        <a href="">
+                        <a href="{{ route('project.detail', ['id' => $project->id]) }}">
                             <img src="{{ asset($project->image->first()->image_src) }}" alt="{{ $project->name }}" />
                         </a>
                     </div>
                     <div class="text">
                         <h4>
-                            <a href="">
+                            <a href="{{ route('project.detail', ['id' => $project->id]) }}">
                                 {{ $project->name }}
                             </a>
                         </h4>

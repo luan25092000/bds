@@ -5,6 +5,9 @@
         </div>
         <div class="contain clearfm">
             <ul class="ulside load-cont">
+                <li>Dự án:
+                    <span>{{ \App\Models\Project::find($product->project_id)->name }}</span>
+                </li>
                 <li>Diện tích:
                     <span>{{ $product->area }} m<sup>2</sup></span>
                 </li>

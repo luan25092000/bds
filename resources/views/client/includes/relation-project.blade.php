@@ -1,12 +1,12 @@
 <div class="boxes">
     <div class="title-cat">
-        <span>Sản phẩm liên quan
+        <span>Dự án liên quan
         </span>
     </div>
     <div class="contain border clearfm">
         <ul class="overHide feature-home">
-            @if ($relationProduct->count() > 0)
-                @foreach ($relationProduct as $item)
+            @if ($relationProject->count() > 0)
+                @foreach ($relationProject as $item)
                     <li class="item item-category">
                         <a
                             href="{{ route('product.detail', ['id' => $item->id]) }}">
@@ -27,7 +27,7 @@
                     </li>
                 @endforeach
             @else
-                <div style="color:white; font-size:1.2rem;">Hiện tại chưa có sản phẩm nào</div>
+                <div style="color:white; font-size:1.2rem;">Hiện tại chưa có dự án nào</div>
             @endif 
         </ul>
     </div>
