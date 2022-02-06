@@ -30,7 +30,7 @@ class AuthController extends Controller
             $result = Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], true);
             if ($result) {
                 if (Auth::user()->role == 0) {
-                    return redirect()->route('project.list');
+                    return redirect()->route('dashboard');
                 } else {
                     return redirect()->route('product.list');
                 }

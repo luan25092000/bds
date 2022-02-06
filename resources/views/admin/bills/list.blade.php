@@ -60,6 +60,8 @@
                             <td>
                                 @if ($bill->status == 0)
                                     <a href="{{ route('bill.update.status',['id' => $bill->id]) }}" onclick="return confirm('Bạn muốn xác nhận hóa đơn này ?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                @else 
+                                    <span class="text-danger">Hóa đơn này đã được thanh toán nên không hiện chức năng nữa</span>
                                 @endif
                             </td>
                         </tr>

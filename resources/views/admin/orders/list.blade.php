@@ -64,10 +64,22 @@
                                     <a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
                                     <a href="{{ route('order.done',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Bạn muốn chốt hợp đồng này ?')"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
                                 @elseif ($order->status == 1)
-                                    @if (date('t') == date('j'))
-                                        <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
-                                    @else
-                                        <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Hôm nay chưa phải là cuối tháng, bạn có chắc chắn muốn gửi hóa đơn về cho khách hàng ?')"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                    @php
+                                        $existBill = \App\Models\Bill::where('order_id', $order->id)->first();
+                                        $bill = \App\Models\Bill::where([['order_id', $order->id], ['status', 1]])->first();
+                                    @endphp
+                                    @if (date('n') != date('n', strtotime(@$bill->created_at)))
+                                        @if (is_null($existBill))
+                                            @if (date('t') == date('j'))
+                                                <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                            @else
+                                                <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Hôm nay chưa phải là cuối tháng, bạn có chắc chắn muốn gửi hóa đơn về cho khách hàng ?')"><i class="fa fa-bell" aria-hidden="true"></i></a>
+                                            @endif
+                                        @else
+                                            <span class="text-danger">Hóa đơn đã gửi về cho khách hàng, vui lòng liên hệ để được thanh toán</span>
+                                        @endif
+                                    @else  
+                                        <span class="text-danger">Nút thông báo sẽ được hiện vào tháng tiếp theo</span>
                                     @endif
                                 @endif
                             </td>

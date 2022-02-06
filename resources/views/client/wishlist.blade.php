@@ -60,8 +60,15 @@
                                         {{ $product->name }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('wishlist.delete', ['id' => $wishlist->id]) }}" onclick="return confirm('Bạn có muốn xóa item này ?')"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
-                                        <a href="{{ route('wishlist.contract', ['id' => $wishlist->id]) }}" style="margin-left:1rem;color:rgb(170, 170, 36);"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        @php
+                                            $order = \App\Models\Order::where([['product_id', $wishlist->product_id], ['status', 1]])->first()
+                                        @endphp
+                                        @if (is_null($order))
+                                            <a href="{{ route('wishlist.delete', ['id' => $wishlist->id]) }}" onclick="return confirm('Bạn có muốn xóa item này ?')"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                            <a href="{{ route('wishlist.contract', ['id' => $wishlist->id]) }}" style="margin-left:1rem;color:rgb(170, 170, 36);"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        @else
+                                            <span style="color:red;">Hiện hợp đồng này đã được chốt</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

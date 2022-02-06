@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/malihu-custom-scrollbar/jquery.mCustomScrollbar.css") }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset("client/assets/scripts/fontawesome/css/all.css") }}" />
     <script type="text/javascript" src="{{ asset("vendor/sweetalert/sweetalert.all.js") }}"></script>
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <title>@yield('title')</title>
 </head>
 

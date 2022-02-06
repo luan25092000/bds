@@ -52,7 +52,7 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
     Route::get('/', function () {
         if (Auth::check()) {
             if (Auth::user()->role == 0) {
-                return redirect()->route('project.list');
+                return redirect()->route('dashboard');
             } elseif (Auth::user()->role == 1) {
                 return redirect()->route('product.list');
             } else {
