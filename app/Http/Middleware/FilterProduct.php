@@ -44,8 +44,8 @@ class FilterProduct
     {
         $time = time();
 
-        // Let the views expire after 15 minutes.
-        $throttleTime = 900;
+        // Let the views expire after 30 seconds.
+        $throttleTime = 30;
 
         return array_filter($products, function ($timestamp) use ($time, $throttleTime)
         {

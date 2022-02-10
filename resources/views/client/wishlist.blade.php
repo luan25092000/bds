@@ -51,26 +51,28 @@
                                 @php
                                     $product = \App\Models\Product::find($wishlist->product_id);
                                 @endphp
-                                <tr>
-                                    <td><a href="{{ asset($product->image->first()->image_src) }}" target="_blank"><img src="{{ asset($product->image->first()->image_src) }}" width=60px></a></td>
-                                    <td>
-                                        {{ \App\Models\Category::find($product->category_id)->name }}
-                                    </td>
-                                    <td>
-                                        {{ $product->name }}
-                                    </td>
-                                    <td>
-                                        @php
-                                            $order = \App\Models\Order::where([['product_id', $wishlist->product_id], ['status', 1]])->first()
-                                        @endphp
-                                        @if (is_null($order))
-                                            <a href="{{ route('wishlist.delete', ['id' => $wishlist->id]) }}" onclick="return confirm('Bạn có muốn xóa item này ?')"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
-                                            <a href="{{ route('wishlist.contract', ['id' => $wishlist->id]) }}" style="margin-left:1rem;color:rgb(170, 170, 36);"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        @else
-                                            <span style="color:red;">Hiện hợp đồng này đã được chốt</span>
-                                        @endif
-                                    </td>
-                                </tr>
+                                @if ($product->status == 1)
+                                    <tr>
+                                        <td><a href="{{ asset($product->image->first()->image_src) }}" target="_blank"><img src="{{ asset($product->image->first()->image_src) }}" width=60px></a></td>
+                                        <td>
+                                            {{ \App\Models\Category::find($product->category_id)->name }}
+                                        </td>
+                                        <td>
+                                            {{ $product->name }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                $order = \App\Models\Order::where([['product_id', $wishlist->product_id], ['status', 1]])->first()
+                                            @endphp
+                                            @if (is_null($order))
+                                                <a href="{{ route('wishlist.delete', ['id' => $wishlist->id]) }}" onclick="return confirm('Bạn có muốn xóa item này ?')"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>
+                                                <a href="{{ route('wishlist.contract', ['id' => $wishlist->id]) }}" style="margin-left:1rem;color:rgb(170, 170, 36);"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            @else
+                                                <span style="color:red;">Hiện hợp đồng này đã được chốt</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </table>
                     @else

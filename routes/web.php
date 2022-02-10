@@ -45,6 +45,7 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/ajax_ward','ClientController@ajaxWard');
     Route::post('/contract/{id}','ClientController@postContract')->name('post.contract');
     Route::get('/bill','ClientController@bill')->name('bill');
+    Route::get('/order','ClientController@order')->name('order');
 });
 
 // Admin
@@ -175,6 +176,10 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::get('list','OrderController@index')->name('order.list');
 
             Route::get('delete/{id}','OrderController@destroy')->name('order.delete');
+
+            Route::get('not-see/{id}','OrderController@notSee')->name('order.not.see');
+
+            Route::get('see/{id}','OrderController@see')->name('order.see');
 
             Route::get('done/{id}','OrderController@update')->name('order.done');
 

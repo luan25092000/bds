@@ -30,6 +30,7 @@
                         <th>Ảnh</th>
                         <th>Danh mục tin tức</th>
                         <th>Tiêu đề</th>
+                        <th>Lượt xem</th>
                         <th>Thời gian đăng</th>
                         <th>Chức năng</th>
                     </tr>
@@ -42,6 +43,7 @@
                             <td><a href="{{ asset($article->thumbnail) }}" target="_blank"><img src="{{ asset($article->thumbnail) }}" width=60px ></a></td>
                             <td>{{ $article->category_article_name }}</td>
                             <td>{{ $article->title }}</td>
+                            <td>{{ $article->view }}</td>
                             <td>{{ date('d/m/Y H:i:s', strtotime($article->updated_at)) }}</td>
                             <td>
                                 <a href="{{ route('article.delete',['id' => $article->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>

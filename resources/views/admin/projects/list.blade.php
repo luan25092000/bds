@@ -31,6 +31,7 @@
                         <th>Tên dự án</th>
                         <th>Địa chỉ</th>
                         <th>Người quản lý</th>
+                        <th>Lượt xem</th>
                         <th>Trạng thái</th>
                         <th>Chức năng</th>
                     </tr>
@@ -44,6 +45,7 @@
                             <td>{{ $project->name }}</td>
                             <td>{{ $project->address }}</td>
                             <td>{{ $project->manager_name }}</td>
+                            <td>{{ $project->view }}</td>
                             <td>{{ $project->status == 0 ? 'Đang cập nhật' : 'Đang mở bán' }}</td>
                             <td>
                                 <a href="{{ route('project.delete',['id' => $project->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>

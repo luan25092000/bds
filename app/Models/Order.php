@@ -14,7 +14,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['fullname', 'phone', 'email', 'product_id', 'staff_id', 'status'];
+    protected $fillable = ['fullname', 'phone', 'email', 'product_id', 'staff_id', 'status', 'description'];
     protected $table = "orders";
 
 }

@@ -92,6 +92,36 @@ class OrderController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function notSee(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->status = 0;
+        $order->save();
+        return redirect()->route('order.list')->with("success","Cập nhật thành công");
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function see(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->status = 2;
+        $order->save();
+        return redirect()->route('order.list')->with("success","Cập nhật thành công");
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id

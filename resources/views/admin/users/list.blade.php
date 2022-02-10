@@ -30,6 +30,7 @@
                         <th>Họ tên</th>
                         <th>Email</th>
                         <th>Vị trí</th>
+                        <th>Số điện thoại</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@
                                     Khách hàng
                                 @endif
                             </td>
+                            <td>{{ $user->phone }}</td>
                             <td>
                                 <a href="{{ route('customer.delete',['id' => $user->id]) }}" onclick="return confirm('Bạn muốn xóa item này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
                                 <a href="{{ route('customer.edit.form',['id' => $user->id]) }}" style="margin-left:1rem;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

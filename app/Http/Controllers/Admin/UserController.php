@@ -42,7 +42,8 @@ class UserController extends Controller
             'name'  => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role' => $request->role
+            'role' => $request->role,
+            'phone' => $request->phone
         ]);
         return redirect()->route('customer.list')->with("success", "Lưu thành công");
     }
@@ -84,6 +85,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
+        $user->phone = $request->phone;
         $user->save();
         return redirect()->route('customer.list')->with("success", "Cập nhật thành công");
     }

@@ -33,6 +33,7 @@
                         <th>Quản lý</th>
                         <th>Tên sản phẩm</th>
                         <th>Diện tích</th>
+                        <th>Lượt xem</th>
                         <th>Trạng thái</th>
                         <th>Chức năng</th>
                     </tr>
@@ -48,6 +49,7 @@
                             <td>{{ $product->manager_name }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->area }} / m<sup>2</sup></td>
+                            <td>{{ $product->view }}</td>
                             <td>
                                 @if ($product->status == 1)
                                     <i class="fa fa-check text-success" aria-hidden="true"></i>

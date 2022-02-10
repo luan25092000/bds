@@ -50,8 +50,21 @@
                                 <a href="{{ route('contact') }}">Liên hệ</a>
                             @endif
                             <a href="{{ route('project') }}">Dự án</a>
+                            @can('staff')
+                                <a href="{{ route('order') }}">Hợp đồng</a>
+                            @endcan
                             @canany(['manager', 'staff'])
-                                <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">{{ \App\Models\Wishlist::where('user_id', Auth::user()->id)->get()->count() }}</sup></a>
+                                @php
+                                    $productFilter = [];
+                                    $productIds = \App\Models\Wishlist::pluck('product_id');
+                                    foreach ($productIds as $productId) {
+                                        $product = \App\Models\Product::find($productId);
+                                        if ($product->status != 1) {
+                                            $productFilter[] = $productId;
+                                        }
+                                    }
+                                @endphp
+                                <a href="{{ route('wishlist') }}">Yêu thích<sup class="wishlist">{{ \App\Models\Wishlist::where('user_id', Auth::user()->id)->whereNotIn('product_id', $productFilter)->get()->count() }}</sup></a>
                             @endcanany
                         </div>
                     </div>

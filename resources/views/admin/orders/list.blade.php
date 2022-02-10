@@ -53,6 +53,8 @@
                             <td>{{ !is_null($order->description) ? $order->description : 'N/A' }}</td>
                             <td>
                                 @if ($order->status == 0)
+                                    Chưa xem
+                                @elseif ($order->status == 2)
                                     Đã xem
                                 @else
                                     Đã chốt
@@ -60,9 +62,17 @@
                             </td>
                             <td>{{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }}</td>
                             <td>
-                                @if ($order->status == 0)
-                                    <a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')"><i class="fa fa-times" aria-hidden="true"></i></a>
-                                    <a href="{{ route('order.done',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Bạn muốn chốt hợp đồng này ?')"><i class="fa fa-check-circle" aria-hidden="true"></i></a>
+                                @if ($order->status != 1)
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Hành động
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" style="min-width:80px !important;">
+                                            <li><a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')">Xóa</a></li>
+                                            <li><a href="{{ route('order.not.see',['id' => $order->id]) }}">Chưa xem</a></li>
+                                            <li><a href="{{ route('order.see',['id' => $order->id]) }}">Đã xem</a></li>
+                                            <li><a href="{{ route('order.done',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn chốt hợp đồng này ?')">Chốt</a></li>
+                                        </ul>
+                                    </div>
                                 @elseif ($order->status == 1)
                                     @php
                                         $existBill = \App\Models\Bill::where('order_id', $order->id)->first();
@@ -81,6 +91,13 @@
                                     @else  
                                         <span class="text-danger">Nút thông báo sẽ được hiện vào tháng tiếp theo</span>
                                     @endif
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Hành động
+                                        <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" style="min-width:80px !important;">
+                                            <li><a href="{{ route('order.delete',['id' => $order->id]) }}" onclick="return confirm('Bạn muốn xóa hợp đồng này ?')">Xóa</a></li>
+                                        </ul>
+                                    </div>
                                 @endif
                             </td>
                         </tr>

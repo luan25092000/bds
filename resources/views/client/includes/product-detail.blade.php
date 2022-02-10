@@ -8,6 +8,9 @@
                 <li>Dự án:
                     <span>{{ \App\Models\Project::find($product->project_id)->name }}</span>
                 </li>
+                <li>Số điện thoại liên hệ:
+                    <span>{{ \App\Models\User::find(\App\Models\Project::find($product->project_id)->manager_id)->phone }}</span>
+                </li>
                 <li>Diện tích:
                     <span>{{ $product->area }} m<sup>2</sup></span>
                 </li>
@@ -25,6 +28,15 @@
                 </li>
                 <li>Tiền nước:
                     <span>{{ number_format($product->water_price,-3,',',',') }}₫ / m<sup>3</sup></span>
+                </li>
+                <li>Thành phố / Tỉnh:
+                    <span>{{ \App\Models\City::find($product->city_id)->name }}</span>
+                </li>
+                <li>Quận / huyện:
+                    <span>{{ \App\Models\District::find($product->district_id)->name }}</span>
+                </li>
+                <li>Xã / phường:
+                    <span>{{ \App\Models\Ward::find($product->ward_id)->name }}</span>
                 </li>
             </ul>
         </div>
