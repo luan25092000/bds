@@ -75,7 +75,7 @@
                     <div class="overHide">
                         <h1 class="logo img">
                             <a href="{{ route('home') }}">
-                                <img src="{{ asset("client/assets/images/logo.png") }}" alt="công ty bất động sản Anh Duy" style="width:50% !important"/>
+                                <img src="{{ asset("client/assets/images/logo.png") }}" alt="công ty bất động sản Anh Duy" style="padding-top:0.25rem;"/>
                             </a>
                         </h1>
                         <div class="slogannone">Công ty bất động sản Anh Duy</div>

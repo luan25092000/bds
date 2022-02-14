@@ -19,6 +19,10 @@ Route::group(['namespace'=>'Client'],function(){
     Route::get('/login', 'AuthController@showLogin')->name('auth.show.login');
     Route::post('/login', 'AuthController@login')->name('auth.post.login');
     Route::get('/logout', 'AuthController@logout')->name('auth.logout');
+    Route::get('/forget-password', 'AuthController@forgetPassword')->name('forget.password');
+    Route::post('/sendmail-confirm', 'AuthController@postSendmail')->name('send.mail');
+    Route::get('/change-password/{token}','AuthController@showChangePassword');
+    Route::post('/change-password','AuthController@updatePassword')->name('update.password');
     Route::get('/','ClientController@index')->name('home');
     Route::get('/introduce','ClientController@introduce')->name('introduce');
     Route::get('/project','ClientController@project')->name('project');
@@ -71,6 +75,8 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
     Route::group(['middleware' => 'check.admin.login'], function() {
         // Dashboard
         Route::get('dashboard','DashboardController@index')->name('dashboard');
+        Route::get('filter-bill', 'DashboardController@fillterBill')->name('fillter.bill');
+        Route::get('export-bill-excel', 'DashboardController@exportExcel')->name('bill.export.excel');
         // Project
         Route::group(['prefix'=>'project'],function(){
             Route::get('list','ProjectController@index')->name('project.list');

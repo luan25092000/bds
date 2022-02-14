@@ -1,6 +1,6 @@
 @extends('client.layouts.template')
 
-@section('title', 'Đăng nhập')
+@section('title', 'Quên mật khẩu')
 
 @section('content')
     <style>
@@ -42,24 +42,19 @@
                 <div class="boxes">
                     <div class="title-cat">
                         <span>
-                            Đăng nhập
+                            Quên mật khẩu
                         </span>
                     </div>
-                    <h1 class="title-article">Mời quý khách đăng nhập</h1>
+                    <h1 class="title-article">Vui lòng nhập email để khôi phục mật khẩu</h1>
                     <div>
-                        <form action="{{ route('auth.post.login') }}" method="POST">
+                        <form action="{{ route('send.mail') }}" method="POST">
 
                             @csrf
 
                             <label for="email">Email <span style="color:red;">*</span></label>
                             <input type="email" id="email" name="email" placeholder="Nhập email" required>
 
-                            <label for="password">Mật khẩu <span style="color:red;">*</span></label>
-                            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
-
-                            <span class="psw"><a href="{{ route('forget.password') }}">Quên mật khẩu</a></span>
-
-                            <input type="submit" value="Đăng nhập">
+                            <input type="submit" value="Gửi link">
                         </form>
                     </div>
                 </div>

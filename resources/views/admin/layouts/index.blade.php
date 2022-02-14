@@ -25,9 +25,6 @@
             @yield('content')
 
         </div>
-        <!-- /#wrapper -->
-        <input type="hidden" id="data1" value="{{ json_encode($data1) }}" />
-        <input type="hidden" id="data2" value="{{ json_encode($data2) }}" />
         
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/1.1.3/metisMenu.min.js"></script>
@@ -76,64 +73,6 @@
                     }
                 });
             });
-        </script>
-        <!-- Google Charts Library -->
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script type="text/javascript">
-            var arr1 = [
-                ['Tháng', 'Doanh thu']
-            ];
-            var orders = JSON.parse(document.getElementById("data1").value);
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(drawChart);
-            for (x of orders) {
-                arr1.push(['Tháng ' + x.bill_month, parseInt(x.total_price)])
-            }
-
-            function drawChart() {
-
-                var data = google.visualization.arrayToDataTable(
-                    arr1
-                );
-
-                var options = {
-                    title: 'Thống kê doanh thu theo tháng'
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('piechart1'));
-
-                chart.draw(data, options);
-            }
-        </script>
-        <script type="text/javascript">
-            var arr2 = [
-                ['Năm', 'Doanh thu']
-            ];
-            var orders = JSON.parse(document.getElementById("data2").value);
-            google.charts.load('current', {
-                'packages': ['corechart']
-            });
-            google.charts.setOnLoadCallback(drawChart);
-            for (x of orders) {
-                arr2.push(['Năm ' + x.bill_year, parseInt(x.total_price)])
-            }
-
-            function drawChart() {
-
-                var data = google.visualization.arrayToDataTable(
-                    arr2
-                );
-
-                var options = {
-                    title: 'Thống kê doanh thu theo năm'
-                };
-
-                var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
-
-                chart.draw(data, options);
-            }
         </script>
     </body>
 
