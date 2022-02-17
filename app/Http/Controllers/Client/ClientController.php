@@ -132,11 +132,17 @@ class ClientController extends Controller
         // Filter price
         if (!is_null($data['price'])) {
             if ($data['price'] == 0) {
-                $builder = $builder->where('room_price','<',5 * pow(10,8));
+                $builder = $builder->where('room_price','<',3 * pow(10,6));
             } elseif ($data['price'] == 1) {
-               $builder = $builder->whereBetween('room_price',[5 * pow(10,8), pow(10,9)]);
+                $builder = $builder->whereBetween('room_price',[3 * pow(10,6) + pow(10,5), 4 * pow(10,6)]);
             } elseif ($data['price'] == 2) {
-                $builder = $builder->where('room_price','>',pow(10,9));
+                $builder = $builder->whereBetween('room_price',[4 * pow(10,6) + pow(10,5), 4 * pow(10,6) + 5 * pow(10,5)]);
+            } elseif ($data['price'] == 3) {
+                $builder = $builder->whereBetween('room_price',[4 * pow(10,6) + 6 * pow(10,5), 5 * pow(10,6)]);
+            } elseif ($data['price'] == 4) {
+                $builder = $builder->whereBetween('room_price',[5 * pow(10,6) + pow(10,5), 8 * pow(10,6)]);
+            } else {
+                $builder = $builder->where('room_price','>',8 * pow(10,6));
             }
         }
 

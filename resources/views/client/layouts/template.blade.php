@@ -123,9 +123,12 @@
                             </select>
                             <select name="price" class="search input">
                                 <option value="">Tất cả mức giá</option>
-                                <option value="0">< 500 triệu</option>
-                                <option value="1">500 triệu - 1 tỷ</option>
-                                <option value="2">> 1 tỷ</option>
+                                <option value="0">0 - 3,000,000đ</option>
+                                <option value="1">3,100,000đ - 4,000,000đ</option>
+                                <option value="2">4,100,000đ - 4,500,000đ</option>
+                                <option value="3">4,600,000đ - 5,000,000đ</option>
+                                <option value="4">5,100,000đ - 8,000,000đ</option>
+                                <option value="5">Trên 8,000,000 đ</option>
                             </select>
                             <select name="area" class="search input">
                                 <option value="">Tất cả diện tích</option>
