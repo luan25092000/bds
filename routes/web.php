@@ -192,6 +192,8 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::get('send-bill/{id}','OrderController@sendBill')->name('order.send.bill');
 
             Route::post('add/{id}','OrderController@store')->name('customer.order.add');
+
+            Route::get('create-bill/{id}','OrderController@createBill')->name('order.create.bill');
         });
          // Bill
          Route::group(['prefix'=>'bill'],function(){

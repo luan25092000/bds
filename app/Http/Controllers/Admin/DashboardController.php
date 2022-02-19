@@ -19,7 +19,14 @@ class DashboardController extends Controller
     {
        $startDate = $request->start_date;
        $endDate = $request->end_date;
-       $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
+       $status = $request->status;
+       if ($status == 2) {
+            $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
+       } else {
+            $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+            ->where('status', $status)
+            ->get();
+       }
        return view('admin.dashboard.index', compact('bills'));
     }
 

@@ -62,7 +62,7 @@
                                         </td>
                                         <td>
                                             @php
-                                                $order = \App\Models\Order::where([['product_id', $wishlist->product_id], ['status', 1]])->first()
+                                                $order = \App\Models\Order::where([['product_id', $wishlist->product_id], ['status', 1], ['staff_id', Auth::user()->id]])->first()
                                             @endphp
                                             @if (is_null($order))
                                                 <a href="{{ route('wishlist.delete', ['id' => $wishlist->id]) }}" onclick="return confirm('Bạn có muốn xóa item này ?')"><i class="fa fa-trash" style="color:red;" aria-hidden="true"></i></a>

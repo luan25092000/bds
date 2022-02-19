@@ -45,9 +45,9 @@
                         <tr>
                             <td>{{ $count }}</td>
                             <td>{{ \App\Models\User::find($bill->user_id)->name }}</td>
-                            <td>{{ \App\Models\Order::onlyTrashed()->where('email',\App\Models\User::find($bill->user_id)->email)->first()->phone }}</td>
-                            <td>{{ \App\Models\Product::find(\App\Models\Order::onlyTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
-                            <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::onlyTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::onlyTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::onlyTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
+                            <td>{{ \App\Models\Order::withTrashed()->where('email',\App\Models\User::find($bill->user_id)->email)->first()->phone }}</td>
+                            <td>{{ \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
+                            <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
                             <td>{{ date('m', strtotime($bill->created_at)) }}</td>
                             <td>
                                 @if ($bill->status == 0)
@@ -56,7 +56,7 @@
                                     Đã thanh toán
                                 @endif
                             </td>
-                            <td>{{ date('d/m/Y H:i:s', strtotime($bill->updated_at)) }}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($bill->created_at)) }}</td>
                             <td>
                                 @if ($bill->status == 0)
                                     <a href="{{ route('bill.update.status',['id' => $bill->id]) }}" onclick="return confirm('Bạn muốn xác nhận hóa đơn này ?')"><i class="fa fa-pencil" aria-hidden="true"></i></a>

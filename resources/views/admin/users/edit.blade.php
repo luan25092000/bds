@@ -21,10 +21,6 @@
                         <input type="text" class="form-control" placeholder="Nhập email" id="email" name="email" value="{{ $user->email }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">Mật khẩu: <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="password" name="password" required>
-                    </div>
-                    <div class="form-group">
                         <label for="phone">Số điện thoại</label>
                         <input type="tel" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" value="{{ $user->phone }}" required>
                     </div>

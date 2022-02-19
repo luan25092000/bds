@@ -80,23 +80,10 @@
                         </h1>
                         <div class="slogannone">Công ty bất động sản Anh Duy</div>
                     </div>
-                    @php
-                        $word = 'Trang chủ tin tức';
-                        foreach ($categories as $category) {
-                            $word .= ' ' . $category->name;
-                        }
-                    @endphp
-                    @if (strlen($word) > 124)
-                        <nav class="category-product">
-                    @else
-                        <nav>
-                    @endif
+                    <nav>
                         <ul class="menuMain">
                             <li class="home"><a href="{{ route('home') }}">Trang chủ</a></li>
-                            @foreach ($categories as $category)
-                                @php
-                                    $word .= ' ' . $category->name;
-                                @endphp
+                            @foreach ($categories->slice(0,7) as $category)
                                 <li><a href='{{ route('product.category', ['id' => $category->id]) }}'>{{ $category->name }}</a></li>
                             @endforeach
                             <li><a href="{{ route('article') }}">Tin tức</a></li>

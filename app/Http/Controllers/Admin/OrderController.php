@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Bill;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -88,6 +89,8 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = 1;
         $order->save();
+        // chuyển trạng thái sản phẩm sang ẩn sau khi chốt
+        Product::where('id', $order->product_id)->update(['status' => 0]);
         return redirect()->route('order.list')->with("success","Cập nhật thành công");
     }
 
@@ -146,7 +149,7 @@ class OrderController extends Controller
             ]);
             return redirect()->route('order.list')->with("success","Gửi hóa đơn thành công, vui lòng liên hệ khách hàng để kiểm tra");
         } else {
-            return view('admin.orders.create-user', compact('id', 'email'));
+            return view('admin.orders.create-user', compact('id', 'email', 'order'));
         }
     }
 }

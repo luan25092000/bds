@@ -50,8 +50,8 @@
                             </tr>
                             @foreach ($bills as $bill)
                                 <tr>
-                                    <td>{{ \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
-                                    <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
+                                    <td>{{ \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->name }}</td>
+                                    <td>{{ number_format(\App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->room_price + \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->electricity_price + \App\Models\Product::find(\App\Models\Order::withTrashed()->find(\App\Models\Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') }}₫</td>
                                     <td>{{ date('m', strtotime($bill->created_at)) }}</td>
                                     <td>
                                         @if ($bill->status == 0)

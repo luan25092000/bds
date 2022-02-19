@@ -57,7 +57,7 @@ class ClientController extends Controller
     }
 
     public function wishlist() {
-        $wishlists = Wishlist::all();
+        $wishlists = Wishlist::where('user_id',Auth::user()->id)->get();
         return view('client.wishlist', compact('wishlists'));
     }
 

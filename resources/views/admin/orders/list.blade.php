@@ -60,7 +60,7 @@
                                     Đã chốt
                                 @endif
                             </td>
-                            <td>{{ date('d/m/Y H:i:s', strtotime($order->updated_at)) }}</td>
+                            <td>{{ date('d/m/Y H:i:s', strtotime($order->created_at)) }}</td>
                             <td>
                                 @if ($order->status != 1)
                                     <div class="dropdown">
@@ -75,12 +75,14 @@
                                     </div>
                                 @elseif ($order->status == 1)
                                     @php
-                                        $existBill = \App\Models\Bill::where('order_id', $order->id)->first();
+                                        $existBill = \App\Models\Bill::where('order_id', $order->id)->orderBy('id','desc')->first();
                                         $bill = \App\Models\Bill::where([['order_id', $order->id], ['status', 1]])->first();
                                     @endphp
-                                    @if (date('n') != date('n', strtotime(@$bill->created_at)))
-                                        @if (is_null($existBill))
-                                            @if (date('t') == date('j'))
+                                    {{-- Check xem hóa đơn tháng trước đã thanh toán hay chưa --}}
+                                    {{-- @if (date('n') != date('n', strtotime(@$bill->created_at))) --}}
+                                        {{-- Check hóa đơn gần nhất có thời gian tạo mới khác với tháng hiện tại --}}
+                                        @if (date('n',strtotime(@$existBill->created_at)) != date('n'))
+                                            @if (date('j') > date('j', strtotime($order->created_at)))
                                                 <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;"><i class="fa fa-bell" aria-hidden="true"></i></a>
                                             @else
                                                 <a href="{{ route('order.send.bill',['id' => $order->id]) }}" style="margin:0 1rem;" onclick="return confirm('Hôm nay chưa phải là cuối tháng, bạn có chắc chắn muốn gửi hóa đơn về cho khách hàng ?')"><i class="fa fa-bell" aria-hidden="true"></i></a>
@@ -88,9 +90,9 @@
                                         @else
                                             <span class="text-danger">Hóa đơn đã gửi về cho khách hàng, vui lòng liên hệ để được thanh toán</span>
                                         @endif
-                                    @else  
+                                    {{-- @else  
                                         <span class="text-danger">Nút thông báo sẽ được hiện vào tháng tiếp theo</span>
-                                    @endif
+                                    @endif --}}
                                     <div class="dropdown">
                                         <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Hành động
                                         <span class="caret"></span></button>

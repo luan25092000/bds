@@ -25,12 +25,19 @@ class BillExport implements FromCollection,WithHeadings
     {
         $startDate = $this->data['start_date'];
         $endDate = $this->data['end_date'];
-        $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
+        $status = $this->data['status'];
+        if ($status == 2) {
+            $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])->get();
+        } else {
+            $bills = Bill::whereBetween('updated_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
+            ->where('status', $status)
+            ->get();
+        }
         foreach ($bills as $bill) {
             $bill['name'] = User::find($bill->user_id)->name;
-            $bill['phone'] = Order::onlyTrashed()->where('email', User::find($bill->user_id)->email)->first()->phone;
-            $bill['product'] = Product::find(Order::onlyTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->name;
-            $bill['price'] = number_format(Product::find(Order::onlyTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->room_price + Product::find(Order::onlyTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->electricity_price + Product::find(Order::onlyTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') . '₫';
+            $bill['phone'] = Order::withTrashed()->where('email', User::find($bill->user_id)->email)->first()->phone;
+            $bill['product'] = Product::find(Order::withTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->name;
+            $bill['price'] = number_format(Product::find(Order::withTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->room_price + Product::find(Order::withTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->electricity_price + Product::find(Order::withTrashed()->find(Bill::find($bill->id)->order_id)->product_id)->water_price,-3,',',',') . '₫';
             $bill['month'] = date('m', strtotime($bill->created_at));
             $bill['stt'] = $bill->status == 0 ? 'Chưa thanh toán' : 'Đã thanh toán';
             $bill['update_date'] = date('d/m/Y H:i:s',strtotime($bill->updated_at));

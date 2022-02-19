@@ -20,12 +20,12 @@
                     <input type="hidden" name="order_id" value="{{ $id }}" />
 
                     <div class="form-group">
-                        <label for="name">Họ tên: <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Nhập họ tên" id="name" name="name" required>
+                        <label for="name">Họ tên:</label>
+                        <input type="text" class="form-control" placeholder="Nhập họ tên" id="name" name="name" value="{{ $order->fullname }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email: <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Nhập email" id="email" name="email" required>
+                        <label for="email">Email:</label>
+                        <input type="text" class="form-control" placeholder="Nhập email" id="email" name="email" value="{{ $order->email }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="password">Mật khẩu: <span class="text-danger">*</span></label>

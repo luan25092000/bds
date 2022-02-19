@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Order;
 
 class UserController extends Controller
 {
@@ -81,9 +82,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        Order::where('email', $user->email)->update(['fullname' => $request->name, 'email' => $request->email, 'phone' => $request->phone]);
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->phone = $request->phone;
         $user->save();
