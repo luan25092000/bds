@@ -14,6 +14,7 @@ use App\Models\Ward;
 use App\Models\Media;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -219,5 +220,16 @@ class ProductController extends Controller
     {
         Product::where('id', $id)->update(['status' => 1]);
         return redirect()->route('product.list')->with("success","Hiện thành công");
+    }
+
+    public function deleteAll(Request $request)
+    {
+        $ids = $request->get('ids');
+        if (!is_null($ids)) {
+            DB::delete('delete from products where id in(' . implode(",", $ids) . ')');
+            return redirect()->route('product.list')->with("success","Xóa thành công");
+        } else {
+            return redirect()->route('product.list')->with("invalid","Vui lòng lựa chọn sản phẩm bạn muốn xóa");
+        }
     }
 }

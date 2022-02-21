@@ -77,6 +77,7 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
         Route::get('dashboard','DashboardController@index')->name('dashboard');
         Route::get('filter-bill', 'DashboardController@fillterBill')->name('fillter.bill');
         Route::get('export-bill-excel', 'DashboardController@exportExcel')->name('bill.export.excel');
+        Route::get('filter-order', 'DashboardController@fillterOrder')->name('fillter.order');
         // Project
         Route::group(['prefix'=>'project'],function(){
             Route::get('list','ProjectController@index')->name('project.list');
@@ -128,6 +129,8 @@ Route::namespace('Admin')->prefix('ad')->group(function () {
             Route::get('ajax_district','ProductController@ajaxDistrict');
             
             Route::get('ajax_ward','ProductController@ajaxWard');
+
+            Route::delete('delete-all', 'ProductController@deleteAll')->name('product.delete.all');
         });
         // User
         Route::group(['prefix'=>'user'],function(){
